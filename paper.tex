@@ -752,9 +752,10 @@ leave a choice of host among every permanent the Aura can enchant. Once the boar
 or more nodes that choice is not unique, and (H) excludes any mark that could narrow it,
 so neither route is forced. Forced play therefore cannot attach a node at depth 2 or
 more; there it can only delete or suspend subtrees. Third, under (O) every rule, even
-$I\,x \to x$, gives the root of the surviving argument a new host, and unless the redex is
-the whole term that host is a cell, so the root lands at depth 2 or more. Hence, under
-(E), (P), (H) and (O), no reduction step below the root can be forced. The first and third
+$I\,x \to x$, gives the root of the surviving argument a new host, and unless the head of
+the redex sits on the anchor that host is a cell, so the root lands at depth 2 or more.
+Hence, under (E), (P), (H) and (O), no reduction step whose head is off the anchor can be
+forced. The first and third
 steps follow from (E) and (O); the second is a survey result, and the survey was not
 exhaustive.
 
