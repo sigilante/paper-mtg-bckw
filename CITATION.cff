@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the paper."
+title: "Combinators on the Battlefield: BCKW and SKI Reduction in Magic: The Gathering"
+type: article
+authors:
+  - family-names: Davis
+    given-names: "N. E."
+date-released: 2026-11-21
+repository-code: "https://github.com/sigilante/paper-mtg-bckw"
+keywords:
+  - combinatory logic
+  - BCKW
+  - SKI
+  - "Magic: The Gathering"
+  - recreational mathematics
+abstract: >-
+  Terms of combinatory logic are encoded as forests of Aura permanents in
+  Magic: The Gathering and reduced in normal order by three game actions
+  (re-attach, copy, sacrifice) in a cooperative, not forced, model. Checked by
+  simulation against a reference reducer; rules legality is a reading of the
+  Comprehensive Rules of 6 November 2026 without judge confirmation.

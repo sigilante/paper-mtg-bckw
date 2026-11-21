@@ -1,0 +1,20 @@
+{
+  "title": "Combinators on the Battlefield: BCKW and SKI Reduction in Magic: The Gathering",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "creators": [
+    {
+      "name": "Davis, N. E."
+    }
+  ],
+  "description": "<p>Terms of combinatory logic (BCKW and SKI) are encoded directly as game objects in Magic: The Gathering: a term is a forest of Aura permanents with \"Enchant permanent\", and application is attachment. Three game actions, each the printed effect of a real paper card, reduce such a forest in normal order: re-attach an Aura, copy one Aura as a token, and sacrifice an Aura, after which state-based actions delete K's discarded argument.</p><p>The model is cooperative, not forced: one player chooses every action. This is not a claim that Magic is Turing complete in the forced sense of Churchill, Biderman and Herrick. A Python model of the moves agrees step for step with a reference normal-order reducer on the terms tested; it models the moves and selected rule mechanics, not the rules of Magic. Rules legality rests on a reading of the Comprehensive Rules of 6 November 2026, with no judge confirmation.</p><p>The deposit contains the paper, its LaTeX source, the simulators with their saved outputs, and the working notes.</p>",
+  "keywords": [
+    "combinatory logic",
+    "BCKW",
+    "SKI",
+    "Magic: The Gathering",
+    "term rewriting",
+    "recreational mathematics"
+  ],
+  "language": "eng"
+}
