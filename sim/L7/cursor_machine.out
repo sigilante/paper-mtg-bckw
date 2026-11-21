@@ -1,0 +1,41 @@
+== worked trace: S K K x ==
+step 1: S-rule at ANCHOR  -> K x (K x)   {'MARK': 10, 'MOVE': 5, 'COPY': 1, 'SAC': 1, 'SBA': 0}
+step 2: K-rule at ANCHOR  -> x   {'MARK': 6, 'MOVE': 2, 'COPY': 0, 'SAC': 1, 'SBA': 5}
+
+== lockstep check vs reference normal-order reducer ==
+term                     normal form    steps  MARK  MOVE  COPY   SAC   SBA
+S K K x                  x                  2    27     7     1     2     5
+W K x                    x                  2    23     6     1     2     3
+B f g x                  f (g x)            1    24     5     0     1     1
+C f x y                  f y x              1    22     4     0     1     1
+S x y (K a b)            x a (y a)          3    60     9     5     3     6
+S I I (K a)              a                  3    41    11     3     3     8
+S (S (K S) K) I f x      f (f x)            6    87    31     3     6     7
+K a (S I I (S I I))      a                  1    12     2     0     1    10
+S (K (S I)) K a b        b a                5    66    22     2     5     7
+W (S K) (K a b)          a                  4    77    13    10     4    13
+B (C K) W x y            y                  3    40    13     0     3     7
+S x y z w                x z (y z) w        1    31     7     1     1     0
+B B C f g x y            f y (g x)          3    55    18     0     3     3
+W (B (S I) K) x y        x x y              5    70    26     2     5     5
+C (W K) y z              z y                3    41    14     1     3     4
+S (K a) (S I I) b        a (b b)            5    67    20     2     5     5
+
+== events for one rewrite with atomic arguments, empty tail (excluding redex search) ==
+I: {'MARK': 4, 'MOVE': 2, 'COPY': 0, 'SAC': 1, 'SBA': 1}
+K: {'MARK': 6, 'MOVE': 2, 'COPY': 0, 'SAC': 1, 'SBA': 3}
+B: {'MARK': 9, 'MOVE': 5, 'COPY': 0, 'SAC': 1, 'SBA': 1}
+C: {'MARK': 8, 'MOVE': 4, 'COPY': 0, 'SAC': 1, 'SBA': 1}
+W: {'MARK': 7, 'MOVE': 4, 'COPY': 1, 'SAC': 1, 'SBA': 0}
+S: {'MARK': 10, 'MOVE': 5, 'COPY': 1, 'SAC': 1, 'SBA': 0}
+
+== copy cost scales with |copied argument| (S x y z, z = K applied to k atoms) ==
+|z| nodes= 1  first step: {'MARK': 10, 'MOVE': 5, 'COPY': 1, 'SAC': 1, 'SBA': 0}
+|z| nodes= 3  first step: {'MARK': 16, 'MOVE': 5, 'COPY': 3, 'SAC': 1, 'SBA': 0}
+|z| nodes= 5  first step: {'MARK': 22, 'MOVE': 5, 'COPY': 5, 'SAC': 1, 'SBA': 0}
+|z| nodes= 7  first step: {'MARK': 28, 'MOVE': 5, 'COPY': 7, 'SAC': 1, 'SBA': 0}
+|z| nodes= 9  first step: {'MARK': 34, 'MOVE': 5, 'COPY': 9, 'SAC': 1, 'SBA': 0}
+
+random terms (depth<=5, seed 7): 2982 reached normal form, 18 hit 60-step fuel; all steps agreed
+cursors used by the control program: ['A', 'Bc', 'C1', 'C2', 'C3', 'E', 'E2', 'H', 'P', 'Q', 'R1', 'R2', 'R3', 'T'] (14, plus fixed ANCHOR, PARK)
+ALL OK

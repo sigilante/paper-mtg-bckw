@@ -1,0 +1,102 @@
+$ python3 lgx_machine.py
+PASS  C K x y                      -> y   rewrites=CK ref=CK  moves={'MILL': 11, 'OOZE': 6, 'RECLAIM': 4}
+PASS  B K I x y                    -> x   rewrites=BKI ref=BKI  moves={'MILL': 17, 'OOZE': 9, 'RECLAIM': 8, 'PULL': 1}
+PASS  B (C K) I x y                -> y   rewrites=BCK ref=BCK  moves={'MILL': 23, 'OOZE': 11, 'RECLAIM': 12, 'PULL': 1}
+PASS  C (B K I) x y z              -> y z   rewrites=CBKI ref=CBKI  moves={'MILL': 28, 'OOZE': 11, 'RECLAIM': 15, 'PULL': 1}
+PASS  x (I K) (K y z) (C I w f)    -> x K y (f w)   rewrites=IKCI ref=IKCI  moves={'MILL': 25, 'OOZE': 10, 'RECLAIM': 6}
+PASS  K (I x) (B y z w)            -> x   rewrites=KI ref=KI  moves={'MILL': 17, 'OOZE': 12, 'RECLAIM': 4}
+PASS  B B C f g x y                -> f y (g x)   rewrites=BBC ref=BBC  moves={'MILL': 28, 'OOZE': 8, 'RECLAIM': 15, 'PULL': 2}
+PASS  W K x                        -> x   rewrites=WK ref=WK  moves={'MILL': 9, 'OOZE': 5, 'PULL': 1, 'RECLAIM': 4}
+PASS  S K K x                      -> x   rewrites=SK ref=SK  moves={'MILL': 13, 'OOZE': 8, 'PULL': 2, 'RECLAIM': 6}
+PASS  S (K x) I y                  -> x y   rewrites=SKI ref=SKI  moves={'MILL': 18, 'OOZE': 8, 'PULL': 2, 'RECLAIM': 9}
+PASS  W (B K I) (x y)              -> x y   rewrites=WBKI ref=WBKI  moves={'MILL': 36, 'OOZE': 12, 'PULL': 4, 'RECLAIM': 25}
+PASS  S I I (K z)                  -> z   rewrites=SIK ref=SIK  moves={'MILL': 22, 'OOZE': 12, 'PULL': 4, 'RECLAIM': 13}
+PASS  S (S K K) (S K K) (K q)      -> q   rewrites=SSKK ref=SSKK  moves={'MILL': 47, 'OOZE': 24, 'PULL': 8, 'RECLAIM': 30}
+PASS  C (W (C K)) (S I x) y        -> y (S I x)   rewrites=CWCK ref=CWCK  moves={'MILL': 35, 'OOZE': 9, 'RECLAIM': 20, 'PULL': 1}
+PASS  zero-pool S K K x       -> OUT OF FUEL (x)
+PASS  zero-pool C K x y            -> y   rewrites=CK ref=CK
+PASS  zero-pool B K I x y          -> x   rewrites=BKI ref=BKI
+PASS  zero-pool C (B K I) x y z    -> y z   rewrites=CBKI ref=CBKI
+PASS  zero-pool B B C f g x y      -> f y (g x)   rewrites=BBC ref=BBC
+PASS  W W W (diverges)            -> step-bound after 50 rewrites; cards in play constant = 5
+ALL PASS
+
+$ python3 lgx_machine.py --random 3000
+random: 2987/2987 normalizing terms agree (term + rewrite sequence); 13 skipped as non-normalizing within 300 steps
+
+$ python3 lgx_machine.py --budget 1500
+budget: 1499/1499 terms normalize with exactly the per-name budget and fail with one card less
+
+$ python3 lgx_machine.py --trace --moves
+TRACE C K x y   prefix: @ @ @ C K x y   initial pool: {}
+  start                              L=[@ @ @ C K x y]  G=[]  X={}
+    MILL @                           L=[@ @ C K x y]  G=[@]  X={}
+    MILL @                           L=[@ C K x y]  G=[@ @]  X={}
+    MILL @                           L=[C K x y]  G=[@ @ @]  X={}
+    MILL C                           L=[K x y]  G=[@ @ @ C]  X={}
+    OOZE C (depth 0)                 L=[K x y]  G=[@ @ @]  X={Cx1}
+    OOZE @ (depth 0)                 L=[K x y]  G=[@ @]  X={@x1 Cx1}
+  C: head + 1 spine @ exiled         L=[K x y]  G=[@ @]  X={@x1 Cx1}
+    MILL K                           L=[x y]  G=[@ @ K]  X={@x1 Cx1}
+    MILL x                           L=[y]  G=[@ @ K x]  X={@x1 Cx1}
+    MILL y                           L=[]  G=[@ @ K x y]  X={@x1 Cx1}
+  C: args milled, lens=[1, 1, 1]     L=[]  G=[@ @ K x y]  X={@x1 Cx1}
+    RECLAIM x (depth 1)              L=[x]  G=[@ @ K y]  X={@x1 Cx1}
+    RECLAIM y (depth 0)              L=[y x]  G=[@ @ K]  X={@x1 Cx1}
+    RECLAIM K (depth 0)              L=[K y x]  G=[@ @]  X={@x1 Cx1}
+  C: contractum on top of L          L=[K y x]  G=[@ @]  X={@x1 Cx1}
+    MILL K                           L=[y x]  G=[@ @ K]  X={@x1 Cx1}
+    OOZE K (depth 0)                 L=[y x]  G=[@ @]  X={@x1 Cx1 Kx1}
+    OOZE @ (depth 0)                 L=[y x]  G=[@]  X={@x2 Cx1 Kx1}
+    OOZE @ (depth 0)                 L=[y x]  G=[]  X={@x3 Cx1 Kx1}
+  K: head + 2 spine @ exiled         L=[y x]  G=[]  X={@x3 Cx1 Kx1}
+    MILL y                           L=[x]  G=[y]  X={@x3 Cx1 Kx1}
+    MILL x                           L=[]  G=[y x]  X={@x3 Cx1 Kx1}
+  K: args milled, lens=[1, 1]        L=[]  G=[y x]  X={@x3 Cx1 Kx1}
+    OOZE x (depth 0)                 L=[]  G=[y]  X={@x3 Cx1 Kx1 xx1}
+    RECLAIM y (depth 0)              L=[y]  G=[]  X={@x3 Cx1 Kx1 xx1}
+  K: contractum on top of L          L=[y]  G=[]  X={@x3 Cx1 Kx1 xx1}
+    MILL y                           L=[]  G=[y]  X={@x3 Cx1 Kx1 xx1}
+  halt (G bottom-to-top = normal form) L=[]  G=[y]  X={@x3 Cx1 Kx1 xx1}
+  result: PASS y   rewrites=CK ref=CK  moves={'MILL': 11, 'OOZE': 6, 'RECLAIM': 4}
+
+TRACE S K K x   prefix: @ @ @ S K K x   initial pool: {'x': 1}
+  start                              L=[@ @ @ S K K x]  G=[]  X={xx1}
+    MILL @                           L=[@ @ S K K x]  G=[@]  X={xx1}
+    MILL @                           L=[@ S K K x]  G=[@ @]  X={xx1}
+    MILL @                           L=[S K K x]  G=[@ @ @]  X={xx1}
+    MILL S                           L=[K K x]  G=[@ @ @ S]  X={xx1}
+    OOZE S (depth 0)                 L=[K K x]  G=[@ @ @]  X={Sx1 xx1}
+    OOZE @ (depth 0)                 L=[K K x]  G=[@ @]  X={@x1 Sx1 xx1}
+  S: head + 1 spine @ exiled         L=[K K x]  G=[@ @]  X={@x1 Sx1 xx1}
+    MILL K                           L=[K x]  G=[@ @ K]  X={@x1 Sx1 xx1}
+    MILL K                           L=[x]  G=[@ @ K K]  X={@x1 Sx1 xx1}
+    MILL x                           L=[]  G=[@ @ K K x]  X={@x1 Sx1 xx1}
+  S: args milled, lens=[1, 1, 1]     L=[]  G=[@ @ K K x]  X={@x1 Sx1 xx1}
+    PULL x                           L=[]  G=[@ @ K K x x]  X={@x1 Sx1}
+    RECLAIM x (depth 0)              L=[x]  G=[@ @ K K x]  X={@x1 Sx1}
+    RECLAIM K (depth 1)              L=[K x]  G=[@ @ K x]  X={@x1 Sx1}
+    PULL @                           L=[K x]  G=[@ @ K x @]  X={Sx1}
+    RECLAIM @ (depth 0)              L=[@ K x]  G=[@ @ K x]  X={Sx1}
+    RECLAIM x (depth 0)              L=[x @ K x]  G=[@ @ K]  X={Sx1}
+    RECLAIM K (depth 0)              L=[K x @ K x]  G=[@ @]  X={Sx1}
+  S: contractum on top of L          L=[K x @ K x]  G=[@ @]  X={Sx1}
+    MILL K                           L=[x @ K x]  G=[@ @ K]  X={Sx1}
+    OOZE K (depth 0)                 L=[x @ K x]  G=[@ @]  X={Kx1 Sx1}
+    OOZE @ (depth 0)                 L=[x @ K x]  G=[@]  X={@x1 Kx1 Sx1}
+    OOZE @ (depth 0)                 L=[x @ K x]  G=[]  X={@x2 Kx1 Sx1}
+  K: head + 2 spine @ exiled         L=[x @ K x]  G=[]  X={@x2 Kx1 Sx1}
+    MILL x                           L=[@ K x]  G=[x]  X={@x2 Kx1 Sx1}
+    MILL @                           L=[K x]  G=[x @]  X={@x2 Kx1 Sx1}
+    MILL K                           L=[x]  G=[x @ K]  X={@x2 Kx1 Sx1}
+    MILL x                           L=[]  G=[x @ K x]  X={@x2 Kx1 Sx1}
+  K: args milled, lens=[1, 3]        L=[]  G=[x @ K x]  X={@x2 Kx1 Sx1}
+    OOZE x (depth 0)                 L=[]  G=[x @ K]  X={@x2 Kx1 Sx1 xx1}
+    OOZE K (depth 0)                 L=[]  G=[x @]  X={@x2 Kx2 Sx1 xx1}
+    OOZE @ (depth 0)                 L=[]  G=[x]  X={@x3 Kx2 Sx1 xx1}
+    RECLAIM x (depth 0)              L=[x]  G=[]  X={@x3 Kx2 Sx1 xx1}
+  K: contractum on top of L          L=[x]  G=[]  X={@x3 Kx2 Sx1 xx1}
+    MILL x                           L=[]  G=[x]  X={@x3 Kx2 Sx1 xx1}
+  halt (G bottom-to-top = normal form) L=[]  G=[x]  X={@x3 Kx2 Sx1 xx1}
+  result: PASS x   rewrites=SK ref=SK  moves={'MILL': 13, 'OOZE': 8, 'PULL': 2, 'RECLAIM': 6}
+

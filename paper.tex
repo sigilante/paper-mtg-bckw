@@ -40,7 +40,6 @@
 
 \title{Combinators on the Battlefield:\texorpdfstring{\\}{ }BCKW and SKI Reduction in Magic: The Gathering}
 \author{N. E. Davis}
-% TODO(author): affiliation and email lines, if wanted.
 \date{Draft of 21 November 2026}
 
 \begin{document}
@@ -54,10 +53,13 @@ arguments hang from a chain of ``cell'' Auras below it. Each action is the print
 of a real paper card: re-attach an Aura (\card{Simic Guildmage}), copy one Aura as a token
 (\card{Flash Photography} or \card{Replicator}), or sacrifice an Aura (\card{Auratog}).
 Under three stated modelling assumptions, every rule of B, C, K and W, and of S and I,
-becomes a fixed sequence of these actions that realises one normal-order step. In BCKW, B
-and C copy nothing (each is three re-attachments and the sacrifice of the head), W alone
-copies, and K is one move and one sacrifice, after which the game's state-based actions
-delete the discarded argument with no choices. A Python model of the moves agrees step for
+becomes a fixed sequence of re-attachments, plus one copy per node of the duplicated
+argument and one more re-attachment when trailing arguments are present, ending in one
+sacrifice; the sequence realises one normal-order step. In BCKW, B and C copy nothing
+(three re-attachments and the sacrifice of the head), W alone copies, and K is one move
+and one sacrifice, in each case plus the one re-attachment for trailing arguments. After
+K's sacrifice the game's state-based actions delete the discarded argument with no
+choices. A Python model of the moves agrees step for
 step with a reference normal-order reducer on 17 fixed and 500 random terms; it models the
 moves and selected rule mechanics, not the rules of Magic. The model is cooperative: one
 player chooses every action, the cards permit the reduction moves without preventing
@@ -70,34 +72,52 @@ on our reading of the Comprehensive Rules of 6 November 2026; no judge has confi
 
 Churchill, Biderman and Herrick show that a two-player game of Magic: The Gathering,
 with every move after setup forced, can simulate a universal Turing machine
-\citep{cbh2019}. They reduce the halting of Rogozhin's (2,18) machine to the outcome of
-the game, so non-halting appears as a mandatory loop, a draw under \CR{104.4b}. Their tape
-is a row of creature tokens, power and toughness encode the head position, and about half
-the deck exists to remove player choices. Churchill's earlier machines (2010--2014) need
-``may'' choices \citep{churchillsite}. Yin and Churchill embed a register machine with 12
+\citep{cbh2019}. We read that paper only through a summarised HTML rendering
+(Section~\ref{sec:threats}). By that account they reduce the halting of Rogozhin's (2,18)
+machine to the outcome of the game, so non-halting appears as a mandatory loop, a draw
+under \CR{104.4b}; the tape is a row of creature tokens, and power and toughness encode
+the distance from the head. Churchill's earlier machines (2010--2014) need ``may''
+choices \citep{churchillsite}. Yin and Churchill embed a register machine with 12
 registers, addressed memory and a return stack; the program is the order of lands in a
 library, and the return stack is a chain of tokens linked by phasing \citep{yin2024}.
 These constructions compile computation into a machine that Magic then simulates.
 
 Other results concern complexity. \citet{biderman2020} shows that deciding mate-in-$n$ is
 $\Delta^0_n$-hard and that optimal play is non-arithmetic in general.
-\citet{chatterjee2016} show that deciding the legality of a single step is coNP-complete
-in general. For other card games, \citet{nicolosi2026} prove an undecidability result for
+\citet{chatterjee2016} study the complexity of deciding the legality of a single step; we
+read only the publisher's record of that paper, not its text. For other card games, \citet{nicolosi2026} prove an undecidability result for
 strategies in Yu-Gi-Oh!, and \citet{dalaklis2026} claim Turing completeness for Riftbound.
-We found no embedding of lambda calculus, combinatory logic or term rewriting in Magic;
-Section~\ref{sec:threats} gives the search and its limits.
+In six web-search queries we found no embedding of lambda calculus, combinatory logic or
+term rewriting in Magic; the search did not reach forum or chat archives
+(Section~\ref{sec:threats}).
 
 We take a different route and lay out the terms of a functional calculus on the
 battlefield \emph{as themselves}. The board reads as the term, and each rewrite rule
 becomes a short sequence of ordinary game actions. We do this for combinatory logic in the
 bases BCKW and SKI.
 
-By \emph{native} we mean four things. (i) One relation that the game already maintains,
-``attached to'', carries term structure, together with card names; we use no counters, no
-text-changing effects and no position tags. (ii) The shape of the board locates the redex;
-nobody counts. (iii) Each primitive action is the printed effect of a real paper card.
-(iv) The game itself discards a subterm, through state-based actions. Native does not mean
-forced.
+By \emph{native} we mean four things, each of which a construction could fail.
+(i) One relation that the game already maintains, ``attached to'', carries term structure,
+together with card names; we use no counters, no text-changing effects and no position
+tags. (ii) Rules are local in that relation: every operand of a primitive action is the
+head of the redex, one of the first four cells of its chain, the leaf on one of those
+cells, or a node the player reaches from one of these by walking attachment (the end of a
+chain, or a node of the argument being copied). No rule needs a count beyond those four
+cells, a tag, or a search of an unordered zone. (iii) Each primitive action is the printed
+effect of a real paper card. (iv) The game itself discards a subterm, through state-based
+actions. Native does not mean forced.
+
+\paragraph{What the game does and what the player does.} The game supplies three things:
+the forest, held by the attachment relation; relocation of a whole subterm by one
+re-attachment, because what is attached to a moved Aura travels with it
+(Section~\ref{sec:machine} gives the rules basis, which is an argument from absence); and
+deletion of a discarded subterm by state-based actions, with no action by the player. The
+player supplies the rest: the search for the normal-order redex, which is a depth-first
+walk from the anchor; the arity test, which looks at up to three cells below the head; the
+choice and order of the moves of each rule; and the copy of a duplicated argument, a
+traversal that makes one copy per node. Turing machines built in Magic with optional
+(``may'') choices predate the forced construction \citep{churchillsite}, so what is new
+here is the representation of terms and rules, not computing power.
 
 \paragraph{Contributions.} Each item carries its status.
 \begin{itemize}[nosep,leftmargin=*]
@@ -107,8 +127,8 @@ forced.
 \item A machine with three primitives (MOVE, COPY, SAC) and a rewrite table for B, C, K,
   W, S and I (Section~\ref{sec:machine}). \emph{Constructed and simulated}; a proposition
   about the abstract moves comes with a proof sketch for all six rows.
-\item Three card realisations: a bounded 11-card board for $S\,K\,K\,x$, an unbounded
-  13-card engine for closed SKI terms, and a pausable 11-card engine built on
+\item Three card realisations: a bounded board of 11 cards plus external mana for
+  $S\,K\,K\,x$, an unbounded 13-card engine for closed SKI terms, and a pausable 11-card engine built on
   \card{Replicator} (Section~\ref{sec:cards}). \emph{Constructed and simulated at the level of
   the moves}; legality is \emph{argued} from quoted rules and rulings.
 \item A measurement of BCKW against SKI on five Church-numeral programs
@@ -146,10 +166,16 @@ number of nodes of $t$ as a binary tree, $2m-1$ for a term with $m$ atoms.
 \subsection{The Magic rules we use}
 
 We cite the Comprehensive Rules (CR) of 6 November 2026 \citep{cr2026} and Oracle text and
-rulings as served by Scryfall \citep{scryfall}. We compared every card text, ruling and
-rule quoted in the working notes for this construction with these sources: 24 of 24 cards
-and 9 of 9 rulings matched; 46 of 48 rules matched, and the two minor mismatches are
-corrected here. Appendix~\ref{app:rules} quotes the main rules cited.
+rulings as served by Scryfall \citep{scryfall}. We read the rule text from per-rule copies
+of that edition (mtg.wiki and yawgatog.com), not from Wizards' own file. The working notes
+for this construction are archived with the paper in \texttt{notes/}. A check recorded in
+\texttt{notes/L10-source-check.md} compared the card texts, rulings and rules quoted in
+the notes for the two engines with these sources: 24 of 24 cards and 9 of 9 rulings
+matched; 46 of 48 rules matched, and the two minor mismatches are corrected here. That
+check did not cover \card{Lithoform Engine} or the rejected label cards of
+Section~\ref{sec:cards}; Appendix~\ref{app:cards} says how each card in it was checked.
+Appendix~\ref{app:rules} quotes the rules we rely on; \CR{117.4}, \CR{603.4}, \CR{700.6},
+\CR{704.5b} and \CR{704.5p} are cited by number only.
 
 \begin{description}[leftmargin=1em,nosep]
 \item[Permanents and Auras.] A permanent is a card or token on the battlefield
@@ -297,7 +323,8 @@ path of $y$'s encoding.}\label{tab:rewrite}
 
 Within BCKW the division of labour is clean. B and C copy nothing: each is three
 re-attachments and the sacrifice of the head. K is one move and one sacrifice, and the
-game deletes $y$. W is the only rule that copies. In SKI, S both rearranges and copies,
+game deletes $y$. Each of these takes one more re-attachment when trailing arguments are
+present. W is the only rule that copies, and it makes one copy per node of $y$. In SKI, S both rearranges and copies,
 and K does the deletion.
 
 \subsection{Correctness of the abstract moves}
@@ -382,9 +409,9 @@ $r_2$ onto $c_1$, as in step (6) of S. The chain under $r_1$ is $x$'s cells, the
 to $x\,y\,y\,a_3\cdots a_n$. $h$ has no children when it is sacrificed, and the cascade
 removes nothing.
 
-In no row does a MOVE put a node onto its current host. The simulator checks all six rows
-in lock step (Section~\ref{sec:eval}), and a separate hand check of the general table,
-with trailing arguments and nested redexes, agrees.
+In no row does a MOVE put a node onto its current host. The sketch covers all six rows,
+with and without $\rest$ and with $P$ the anchor or a cell, and does not rest on any
+other check; the simulator runs the same rows in lock step (Section~\ref{sec:eval}).
 \end{proof}
 
 The proposition says nothing about Magic legality beyond (M1)--(M3). The intermediate
@@ -450,8 +477,9 @@ variables & \card{Confiscate}, \card{Lay Claim}, \card{Volition Reins}, \card{Ta
 \bottomrule
 \end{tabularx}
 \caption{Label Auras for the \card{Flash Photography} engine. A closed SKI deck needs the first
-four rows; a BCKW deck can avoid all triggers with C~=~\card{Bound in Gold} and
-W~=~\card{Curator's Ward}. Only the mixed seven-label deck uses \card{Faith's Fetters} and
+four rows; a BCKW deck without I can avoid all triggers with C~=~\card{Bound in Gold} and
+W~=~\card{Curator's Ward}, and with I it needs a sixth label, for which the remaining
+candidates here both trigger. The mixed seven-label deck uses \card{Faith's Fetters} and
 \card{Elemental Resonance}.}\label{tab:labels}
 \end{table}
 
@@ -461,7 +489,7 @@ unattached (\CR{704.5p}). The Runes draw a card on entering, which would deck th
 controller under unbounded copying. Auras with ``Enchant nonland permanent'' or ``Enchant
 enchantment'' cannot sit on the anchor land, where any label may end up as the head.
 
-\subsection{\texorpdfstring{A bounded board: $S\,K\,K\,x$ in 11 cards}{A bounded board: S K K x in 11 cards}}
+\subsection{\texorpdfstring{A bounded board: $S\,K\,K\,x$ in 11 cards plus external mana}{A bounded board: S K K x in 11 cards plus external mana}}
 
 The cards are an Island (anchor), \card{Bound in Gold} (S), two \card{Intercessor's Arrest}
 (K), three \card{Indestructibility} (cells), \card{Confiscate} ($x$), \card{Simic Guildmage},
@@ -476,7 +504,10 @@ second K, $c_1$ and the copy of $x$. The run takes five moves, one copy and two 
 (trace~1 of \texttt{sim/L6/output.txt}).
 
 By the printed costs that is five activations at \ms{1}\ms{U} and one cast of \card{Flash
-Photography} at \ms{2}\ms{U}\ms{U}, 14 mana in all (our arithmetic). Each copied node uses
+Photography} at \ms{2}\ms{U}\ms{U}, 14 mana in all, and casting the seven Auras costs 27
+more (our arithmetic in both cases). The 11 cards do not supply that mana: the Island
+gives \ms{U} once. The mana comes from outside the 11 cards
+(Section~\ref{sec:threats}). Each copied node uses
 one cast of a copy spell, and \card{Flash Photography} gives two (cast and flashback), so
 this board is bounded. The two engines below run the same reduction in simulation for 16
 mana and 42 stack resolutions (\card{Flash Photography} engine) or 12 mana and 32
@@ -527,8 +558,12 @@ keeps the Guildmage. \card{Dramatic Reversal} untaps \card{Replicator} with ever
 and one stack object.
 
 Every primitive is an activated ability that leaves the stack as it found it. The run can
-therefore stop at any primitive boundary, let the step or turn end, and resume. A pause
-loses at most the unspent mana in the pool (\CR{106.4}).
+therefore stop at any primitive boundary, let the step or turn end, and resume. Within a
+turn, a pause loses at most the unspent mana in the pool (\CR{106.4}). A pause that
+passes the turn also gives the opponent a turn, in which the opponent is still assumed to
+take no action, and the controller draws a card at the start of each of their own turns.
+The number of turn passes is therefore bounded by the size of the controller's library
+(\CR{704.5b}); the number of actions within a turn is not bounded.
 
 Engine G is \card{Replicator}, \card{Lithoform Engine}, \card{Isochron Scepter},
 \card{Dramatic Reversal}, \card{Gilded Lotus}, \card{Simic Guildmage} and \card{Auratog}.
@@ -537,8 +572,10 @@ Engine G is \card{Replicator}, \card{Lithoform Engine}, \card{Isochron Scepter},
 Engine} is the anchor. With four labels that is 11 cards for closed SKI terms, and 14 for
 the mixed basis.
 
-The cards impose two limits. Open terms are limited to five variables: split second on
-\card{Take Possession} forbids the activation that would seed it. And because \card{Bound in
+The cards impose two limits. With the 11-card engine G, open terms are limited to five
+variables: split second on \card{Take Possession} forbids the activation that would seed
+it. The fallback seeding below copies the resolved permanent, not the spell, so on our
+reading it does not have this limit. And because \card{Bound in
 Gold} and \card{Intercessor's Arrest} on the anchor switch off \card{Lithoform Engine}'s
 activated abilities, every label must be seeded before the term is built.
 
@@ -637,9 +674,9 @@ both \card{Replicator} engines, G and R, and the random set also agrees under ra
 engine G's move, copy and sacrifice counts equal those of the \card{Flash Photography}
 engine. Both programs end with \texttt{ALL OK}. Re-running both from \texttt{sim/} gave
 identical output, apart from a trailing ``exit 0'' line in the saved L9 file that the
-script does not print. The separate hand check of the rewrite table reported a further
-3000 random terms in lock step and mutation tests that caught wrong move sequences; that
-run is not archived here.
+script does not print. Two reviewers of the rewrite table reported further runs: 3000
+more random terms in lock step, and mutation tests in which planted wrong move sequences
+were caught. Those runs are reported by the reviewers and are not archived here.
 
 \paragraph{Basis comparison.} We compiled five lambda programs three ways and ran them to
 normal form: SKI by bracket abstraction with K and eta rules; BCKW, which uses B and C when
@@ -696,15 +733,16 @@ pattern of several library cards, and the tutors we checked shuffle the library.
 What survives is a refereed, fuel-bounded two-stack machine: the term in prefix order with
 an explicit application card, the library and graveyard as a zipper, and face-up exile as
 a reserve of spare cards. A referee decides each move and counts brackets. With a fixed
-deck it is a finite-state device. Its checker (not archived here) agreed with a reference
+deck it is a finite-state device. Its checker (\texttt{sim/L4}) agreed with a reference
 reducer on 14 hand-written and 2987 random normalising terms.
 
 \subsection{The term on the stack}
 
 The term can live on the stack as copies of inert instants in prefix code. \card{Reiterate}
 copies an object to the top, and copies of a parked \card{Counterspell} with new targets
-delete any object. This works cooperatively for all six combinators; its checker (not
-archived here) agreed with a reference reducer on 10 fixed and 2986 random terms. But the
+delete any object. In its checker (\texttt{sim/L2}) this procedure agreed with a
+reference reducer on 10 fixed and 2986 random terms over all six combinators; the
+checker models the three stack moves, not the rules of Magic. But the
 term's structure lives in the player: the player finds the extent of an argument by
 counting application markers, and no card counts. C has no native stack analogue. No card
 we found reorders the stack, so a reordering is a copy to the top plus a deletion, which
@@ -755,9 +793,11 @@ more; there it can only delete or suspend subtrees. Third, under (O) every rule,
 $I\,x \to x$, gives the root of the surviving argument a new host, and unless the head of
 the redex sits on the anchor that host is a cell, so the root lands at depth 2 or more.
 Hence, under (E), (P), (H) and (O), no reduction step whose head is off the anchor can be
-forced. The first and third
-steps follow from (E) and (O); the second is a survey result, and the survey was not
-exhaustive.
+forced. The first and third steps follow from (E) and (O); the second is a survey result,
+and the survey was not exhaustive. It did not query effects on non-Aura cards that put a
+permanent onto the battlefield attached to another, exchange effects, or every token-copy
+card. Any forced card that attaches onto a non-creature permanent without a choice would
+break the second step.
 
 At the root we sketched one forced K- or I-shaped step with real cards, using the fact
 that Equipment survives its host's death. It does not compose, and we have not simulated
@@ -765,9 +805,10 @@ it.
 
 Lifting (H) changes the picture in a model. A cursor machine in which every operation
 touches only objects within one hop of a marked node (four event kinds: MARK, MOVE, COPY,
-SAC; 14 cursors, not minimised) performs normal-order SKI and BCKW reduction; its checker
-(not archived here) agreed with a reference reducer on 16 fixed and 3000 random terms.
-This is a model result. A card realisation would need forced MOVE and COPY into
+SAC; 14 cursors, not minimised) agreed with a reference normal-order reducer for SKI and
+BCKW on 16 fixed and 3000 random terms, 18 of which stopped at a 60-step bound
+(\texttt{sim/L7}). This is a model result, and that each operation is one forced game
+event is a design hypothesis, not a card mapping. A card realisation would need forced MOVE and COPY into
 non-creature hosts. The candidates we found are \card{Glamer Spinners}, made recurrent by
 \card{Followed Footsteps}, for MOVE, and \card{Extravagant Replication} for COPY, with
 \card{Sterling Grove} to make targets unique. Three conflicts are unresolved: \card{Sterling
@@ -812,27 +853,39 @@ example with an Aura on an Aura.
 \item \emph{Replicator seeding.} The seeding step rests on a reading of two rulings. The
   card is new (released 13 November 2026), and further rulings may follow.
 \item \emph{Setup.} The initial board, the engine and the mana to start it are assumed on
-  the battlefield, not constructed from a deck.
+  the battlefield, not constructed from a deck. The bounded 11-card board needs mana from
+  outside its 11 cards, both to build the term and to run it.
 \item \emph{The opponent} is assumed to pass. Every resolution is a priority round at
-  which the opponent could respond.
+  which the opponent could respond. With engine G, a pause that passes the turn gives the
+  opponent a turn, and the number of such passes is bounded by the controller's library.
 \item \emph{Surveys by wording.} Card surveys (copy effects, Aura movers, forced
   re-attachers, phasing, labels, library triggers, stack reordering) searched Oracle
   wording on Scryfall; a card phrased differently could exist, so each ``we found no
   card'' is a survey result. We did not survey ``becomes a copy'' effects on Auras. The
-  rejected label cards of Section~\ref{sec:cards} and the Oracle text of \card{Lithoform
-  Engine} were not among the texts we compared with Scryfall lookups.
+  query strings and hit counts are in the archived notes: \texttt{notes/L8} (phasing),
+  \texttt{notes/L7} (forced re-attachers and copiers), \texttt{notes/L6} and
+  \texttt{notes/L3} (labels, Aura movers and copy effects) and \texttt{notes/L2} (stack
+  reordering); \texttt{notes/L4} describes its library searches in prose. The rejected
+  label cards of Section~\ref{sec:cards} were not among the texts we compared with
+  Scryfall lookups.
 \item \emph{Simulation scope.} The simulators check the abstract moves (M1)--(M3) and some
   rule mechanics, not the rules of Magic, and they do not show that the mechanics they
   check are all the relevant ones. They do not check the same-controller clause, cycle
-  legality or trigger timing. The checkers for the library, stack and cursor machines, and
-  the hand check's 3000-term run, are not archived with this paper.
+  legality or trigger timing. The checkers for the library, stack and cursor machines are
+  archived in \texttt{sim/L4}, \texttt{sim/L2} and \texttt{sim/L7}, and the first
+  battlefield simulator in \texttt{sim/L3}; each models its own abstract moves. The
+  reviewers' further random runs and mutation tests are not archived.
 \item \emph{Literature search.} We ran six web-search queries (for lambda calculus,
   combinatory logic, SKI, term rewriting, stack machines, Church numerals and related
   terms in Magic) through a general search engine, plus the searches behind the sources
   cited. The search did not reach forum or chat archives (Reddit, MTG Salvation, Discord,
   Stack Exchange) directly, so it does not exclude forum posts. We read \citet{cbh2019}
-  only through a summarised HTML rendering, and we know \citet{chatterjee2016} from a
-  search result only.
+  only through a summarised HTML rendering, so our description of it in the introduction
+  is second-hand, and we read only the publisher's record of \citet{chatterjee2016}, not
+  the paper. The search is recorded in \texttt{notes/L1-prior-art.md}.
+\item \emph{Working notes.} The files in \texttt{notes/} are working notes, archived
+  unedited. Where they disagree with this paper, the paper supersedes them; the README
+  lists the known corrections.
 \end{itemize}
 
 \section{Conclusion and open problems}
@@ -858,11 +911,11 @@ allow graph reduction; we found none.
 \section{Cards}\label{app:cards}
 
 Oracle text as served by Scryfall on 21 November 2026. We checked the text of every card
-below except \card{Lithoform Engine} against single-card lookups; \card{Lithoform Engine}
-is quoted from a separate Scryfall fetch that the check did not cover. ``(\dots)'' marks
-reminder text omitted in our notes. The checked cards are paper cards legal in Legacy,
-Vintage and Commander according to Scryfall; \card{Lithoform Engine} is a paper card legal
-in Legacy according to the same source.
+below against single-card lookups: 23 of them in the check recorded in
+\texttt{notes/L10-source-check.md} (which also covered \card{Replication Technique}, not
+used here), and \card{Lithoform Engine}, together with the full texts of \card{Mythos of
+Illuna}, \card{Lay Claim} and \card{Replicator}, in a later lookup. All are paper cards
+legal in Legacy, Vintage and Commander according to Scryfall.
 
 \begingroup\footnotesize
 \begin{description}[leftmargin=1em,itemsep=1pt,parsep=0pt]
@@ -890,9 +943,10 @@ in Legacy according to the same source.
 \item[\card{Replicator}] \ms{2}, Artifact. ``When this artifact enters, create a Food token.
   (It's an artifact with `\ms{2}, \ms{T}, Sacrifice this token: You gain 3 life.') /
   \ms{2}, \ms{T}: Create a tapped token that's a copy of target token you control.''
-\item[\card{Mythos of Illuna}] Sorcery. ``Create a token that's a copy of target permanent.''
-  Quoted in part; an \ms{R}\ms{G} fight clause is omitted.
-  % TODO(author): full Oracle text of Mythos of Illuna is not in the notes.
+\item[\card{Mythos of Illuna}] \ms{2}\ms{U}\ms{U}, Sorcery. ``Create a token that's a copy
+  of target permanent. If \ms{R}\ms{G} was spent to cast this spell, instead create a token
+  that's a copy of that permanent, except the token has `When this token enters, if it's a
+  creature, it fights up to one target creature you don't control.' ''
 \item[\card{Indestructibility}] \ms{3}\ms{W}, Aura. ``Enchant permanent / Enchanted permanent
   has indestructible. (Effects that say ``destroy'' don't destroy that permanent. A
   creature with indestructible can't be destroyed by damage.)''
@@ -917,8 +971,7 @@ in Legacy according to the same source.
 \item[\card{Confiscate}] \ms{4}\ms{U}\ms{U}, Aura. ``Enchant permanent / You control enchanted
   permanent.''
 \item[\card{Lay Claim}] \ms{5}\ms{U}\ms{U}, Aura. ``Enchant permanent / You control enchanted
-  permanent. / Cycling \ms{2} (\dots)''
-  % TODO(author): cycling reminder text of Lay Claim is elided in the notes.
+  permanent. / Cycling \ms{2} (\ms{2}, Discard this card: Draw a card.)''
 \item[\card{Volition Reins}] \ms{3}\ms{U}\ms{U}\ms{U}, Aura. ``Enchant permanent / When this Aura
   enters, if enchanted permanent is tapped, untap it. / You control enchanted permanent.''
 \item[\card{Take Possession}] \ms{5}\ms{U}\ms{U}, Aura. ``Split second (As long as this spell is
@@ -940,7 +993,9 @@ in Legacy according to the same source.
 
 \section{Rules quoted}\label{app:rules}
 
-Comprehensive Rules, edition effective 6 November 2026. Ellipses mark omissions.
+Comprehensive Rules, edition effective 6 November 2026, read from per-rule copies
+(mtg.wiki and yawgatog.com). Ellipses mark omissions. \CR{117.4}, \CR{603.4}, \CR{700.6},
+\CR{704.5b} and \CR{704.5p} are cited in the text by number only.
 
 \begingroup\footnotesize
 \begin{description}[leftmargin=1em,itemsep=1pt,parsep=0pt]
@@ -987,10 +1042,16 @@ Comprehensive Rules, edition effective 6 November 2026. Ellipses mark omissions.
   to take it from where it currently is and put it onto that object or player. \dots\ An
   Aura, Equipment, or Fortification can't be attached to an object or player it couldn't
   enchant, equip, or fortify, respectively.''
+\item[701.3d] ``\dots\ If an Aura, Equipment, or Fortification that was attached to an
+  object or player ceases to be attached to it, that counts as `becoming unattached [from
+  that object or player]'; this includes if that Aura, Equipment, or Fortification leaves
+  the battlefield, the object leaves the zone it was in, or that player leaves the game.''
 \item[701.21a] ``To sacrifice a permanent, its controller moves it from the battlefield
   directly to its owner's graveyard. A player can't sacrifice something that isn't a
   permanent, or something that's a permanent they don't control. Sacrificing a permanent
   doesn't destroy it''.
+\item[702.11b] (hexproof) ``This permanent can't be the target of spells or abilities your
+  opponents control.''
 \item[702.26b] ``If a permanent phases out, its status changes to `phased out.' Except for
   rules and effects that specifically mention phased-out permanents, a phased-out permanent
   is treated as though it does not exist. It can't affect or be affected by anything else

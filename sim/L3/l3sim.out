@@ -1,0 +1,40 @@
+== worked trace: S K K x (card names in brackets) ==
+  step 1: redex head S#2[Indestructibility] on ANCHOR#1[Island]
+    MOVE  K#4[Bound in Gold] -> ANCHOR#1[Island]   (Simic Guildmage: attach target Aura to another permanent)
+    MOVE  CELL#7[Confiscate] -> K#4[Bound in Gold]   (Simic Guildmage: attach target Aura to another permanent)
+    MOVE  CELL#5[Confiscate] -> CELL#7[Confiscate]   (Simic Guildmage: attach target Aura to another permanent)
+    MOVE  CELL#3[Confiscate] -> K#6[Bound in Gold]   (Simic Guildmage: attach target Aura to another permanent)
+    COPY  x#8[Dream Leash] => new x#9[Dream Leash] on CELL#3[Confiscate]   (token copy; host chosen per 303.4f)
+    SAC   S#2[Indestructibility]   (Auratog: sacrifice an enchantment)
+    => K x (K x)
+  step 2: redex head K#4[Bound in Gold] on ANCHOR#1[Island]
+    MOVE  x#8[Dream Leash] -> ANCHOR#1[Island]   (Simic Guildmage: attach target Aura to another permanent)
+    SAC   K#4[Bound in Gold]   (Auratog: sacrifice an enchantment)
+    SBA pass 1 (704.5m, tokens cease 704.5d): CELL#7[Confiscate]
+    SBA pass 2 (704.5m, tokens cease 704.5d): CELL#5[Confiscate]
+    SBA pass 3 (704.5m, tokens cease 704.5d): K#6[Bound in Gold]
+    SBA pass 4 (704.5m, tokens cease 704.5d): CELL#3[Confiscate]
+    SBA pass 5 (704.5m, tokens cease 704.5d): x#9[Dream Leash]
+    => x
+  normal form: x {'steps': 2, 'moves': 5, 'copies': 1, 'sacs': 2, 'sba_passes': 5, 'max_sba_depth': 5, 'max_nodes': 7}
+
+== lockstep check vs reference normal-order reducer ==
+S K K x                  -> x            OK   steps=2 moves=5 copies=1 sacs=2 sba_passes=5 max_depth=5 max_nodes=7
+W K x                    -> x            OK   steps=2 moves=4 copies=1 sacs=2 sba_passes=3 max_depth=3 max_nodes=5
+B f g x                  -> f (g x)      OK   steps=1 moves=4 copies=0 sacs=1 sba_passes=1 max_depth=1 max_nodes=7
+C f x y                  -> f y x        OK   steps=1 moves=3 copies=0 sacs=1 sba_passes=1 max_depth=1 max_nodes=7
+S x y (K a b)            -> x a (y a)    OK   steps=3 moves=6 copies=5 sacs=3 sba_passes=6 max_depth=3 max_nodes=15
+S I I (K a)              -> a            OK   steps=3 moves=7 copies=3 sacs=3 sba_passes=8 max_depth=7 max_nodes=11
+S (S (K S) K) I f x      -> f (f x)      OK   steps=6 moves=22 copies=3 sacs=6 sba_passes=7 max_depth=3 max_nodes=15
+K a (S I I (S I I))      -> a            OK   steps=1 moves=1 copies=0 sacs=1 sba_passes=10 max_depth=10 max_nodes=15
+S (K (S I)) K a b        -> b a          OK   steps=5 moves=15 copies=2 sacs=5 sba_passes=7 max_depth=3 max_nodes=13
+W (S K) (K a b)          -> a            OK   steps=4 moves=9 copies=10 sacs=4 sba_passes=13 max_depth=10 max_nodes=19
+B (C K) W x y            -> y            OK   steps=3 moves=10 copies=0 sacs=3 sba_passes=7 max_depth=5 max_nodes=11
+
+== runs that fire no S or W need no COPY (moves + sacrifices only): ==
+B f g x                  -> f (g x)  copies=0 moves=4 sacs=1
+C f x y                  -> f y x    copies=0 moves=3 sacs=1
+K a (S I I (S I I))      -> a        copies=0 moves=1 sacs=1
+B (C K) I x y            -> y        copies=0 moves=10 sacs=3
+C (B K I) x y            -> y        copies=0 moves=11 sacs=4
+ALL OK

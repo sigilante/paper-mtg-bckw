@@ -1,0 +1,31 @@
+# L11 bibliography check (2026-11-21)
+
+Corrected entries: `L11-bib-check.bib`. Source paper.bib was not edited. All 13 keys in paper.bib are cited in paper.tex.
+
+| key | status | what changed | source |
+|---|---|---|---|
+| cbh2019 | corrected | Given names added (Alex Churchill, Stella Biderman, Austin Herrick). Now @inproceedings: FUN 2021 = LIPIcs vol. 157, article 9 (9:1-9:19), published 2020-09-16, so year 2020 (the old note's "FUN 2021 / vol. unknown" and year 2019 were wrong or incomplete). Editors Farach-Colton, Prencipe, Uehara. arXiv id kept as eprint. Title capitalisation per LIPIcs: "Magic: The Gathering Is Turing Complete". Article number 9 on the DROPS page was stated as inferred from DOI suffix; the DOI suffix .9 and 9:1-9:19 agree. | https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FUN.2021.9 ; https://arxiv.org/abs/1904.09828 |
+| yin2024 | corrected | Authors: Howe Choong Yin and Alex Churchill. Title confirmed exactly. FUN 2024 (12th), LIPIcs 291, article 31, pages 31:1-31:19, editors Broder and Tamir. DOI confirmed. | https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FUN.2024.31 |
+| biderman2020 | corrected | Full name Stella Biderman; arXiv DOI added; title confirmed ("Magic: the Gathering is as Hard as Arithmetic"); v1 11 Mar 2020; no journal ref (comment "pre-print, currently under review"). | https://arxiv.org/abs/2003.05119 |
+| chatterjee2016 | corrected | Authors Krishnendu Chatterjee, Rasmus Ibsen-Jensen; title confirmed (colon capitalisation "The Gathering"); FAIA vol. 285, ECAI 2016, pp. 1432-1439, IOS Press; DOI confirmed. Page itself did not print the year; 2016 follows from the proceedings title. Note "known from a search result only" removed because the IOS Press landing record was read (abstract/full text not read). | https://doi.org/10.3233/978-1-61499-672-9-1432 (resolves via ebooks.iospress.nl) |
+| churchillsite | corrected (partial) | Author Alex Churchill. Page title/heading as returned by the fetch tool: title line "Magic: the Gathering is Turing Complete.", main heading "Magic Turing Machine: Who and Why?". No date on the page. Which of the two is the HTML `<title>` was not confirmed (fetch tool gave rendered text, not raw HTML). @misc with access date 2026-11-21. | https://toothycat.net/~hologram/Turing/About.html |
+| nicolosi2026 | verified from source | Authors Orazio Nicolosi, Federico Pisciotta, Lorenzo Bresolin; id resolves; current title (v2) is "Deciding winning strategies in Yu-Gi-Oh! TCG is hard", math.LO, v1 3 Mar 2026, v2 11 Mar 2026. The v1 title "Optimal play in Yu-Gi-Oh! TCG is hard" is from the old note only, NOT seen on the page: UNVERIFIED, so I dropped it from the note and kept the version dates. | https://arxiv.org/abs/2603.02863 |
+| dalaklis2026 | verified from source | Authors Nathan Dalaklis, Beckett Fields; id 2609.33839 resolves with title "Riftbound is Turing Complete", cs.CC, v1 27 Sep 2026, v2 30 Sep 2026, 17 pages, 4 tables. | https://arxiv.org/abs/2609.33839 |
+| cr2026 | corrected (partial) | Official page https://magic.wizards.com/en/rules (title "Rules \| Magic: The Gathering"). Download links contain "MagicCompRules 20261106" (txt and pdf under media.wizards.com/2026/downloads/). The effective date 6 Nov 2026 is inferred from the file name; the page text did not state it. Added URL and access date. | https://magic.wizards.com/en/rules |
+| scryfall | corrected (partial) | Added author "Scryfall LLC" -- UNVERIFIED (the operator's legal name is from memory; scryfall.com and docs returned HTTP 403 to the fetch tool). Search snippets confirm: unofficial fan content under the WotC Fan Content Policy, not produced or endorsed by WotC. Consider replacing the author with the plain key "Scryfall". | https://scryfall.com (403 to tool; description from web search of scryfall.com pages) |
+| schonfinkel1924 | verified (secondary index) | Title, journal, vol. 92, pp. 305-316, 1924 confirmed on EUDML and Wikipedia/search results; DOI 10.1007/BF01448013 resolves to Springer (page body blocked by login redirect, so the record itself was not read). Issue number "3--4" is from memory: UNVERIFIED. Behmann note from search summary. | https://eudml.org/doc/159074 |
+| curryfeys1958 | verified (library/review records) | Authors, North-Holland, Amsterdam, 1958, xvi+417 pp, series Studies in Logic and the Foundations of Mathematics, "with two sections by William Craig" confirmed via JSL review listing and library catalogues (search snippets). A corrected 1968 second printing exists; 1958 is the first printing. | https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/haskell-b-curry-and-robert-feys-combinatory-logic-volume-i-with-two-sections-by-william-craig-studies-in-logic-and-the-foundations-of-mathematics-northholland-publishing-company-amsterdam1958-xvi-417-pp/ADC0261CC1D952E97468E2803D4D7721 |
+| turner1979 | verified (secondary) | D. A. Turner, SP&E 9(1), 31-49, Jan 1979, DOI 10.1002/spe.4380090105 confirmed from search results and a PDF header; Wiley page returned 403. Author form changed to "D. A." (given name "David" not seen on a source). | https://doi.org/10.1002/spe.4380090105 |
+
+## Counts
+13 entries. Corrected/completed from a primary page: cbh2019, yin2024, biderman2020, chatterjee2016, nicolosi2026 (verified), dalaklis2026 (verified), plus partial: churchillsite, cr2026, scryfall. Classics verified from secondary records only: schonfinkel1924, curryfeys1958, turner1979. None failed to resolve; both arXiv ids (2603.02863, 2609.33839) resolve.
+
+## Not fully verified
+- scryfall: author "Scryfall LLC" from memory; site returned 403.
+- cr2026: effective date 6 Nov 2026 inferred from file name only; the quotation provenance (mtg.wiki, yawgatog) not rechecked.
+- churchillsite: which of the two headings is the `<title>` tag unconfirmed.
+- nicolosi2026: v1 title "Optimal play in Yu-Gi-Oh! TCG is hard" not seen (dropped).
+- schonfinkel1924: issue "3--4" from memory; Springer/Wiley pages not read directly (login/403).
+- turner1979: Wiley page 403; confirmed only via search results and a PDF header.
+- chatterjee2016: year inferred from proceedings title.
+- cbh2019 and yin2024: DROPS pages read via fetch-tool summary; article number for cbh2019 reported as "inferred" by the tool (consistent with DOI and pages).

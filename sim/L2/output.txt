@@ -1,0 +1,18 @@
+term                         stack machine    reference        copy counter resolve
+S K K x                      x                x                   3       6       3  OK
+W K x                        x                x                   2       4       2  OK
+B f g x                      f (g x)          f (g x)            11      10       4  OK
+C f x y                      f y x            f y x               8       9       3  OK
+S I I (K a)                  a                a                   5       8       5  OK
+W (B f) (K a)                f a              f a                17      19       5  OK
+K (I a)                      K a              K a                 5       5       3  OK
+S (K (S I)) K a b            b a              b a                17      19       9  OK
+K a (W W W)                  a                a                   0       6       2  OK
+S (S K K) (S K K) (B a b)    a (b (B a b))    a (b (B a b))      63      61      13  OK
+random: 2986/2986 agree with reference normal-order reducer (14 skipped: reference did not normalise within fuel)
+cost of the single head step W x y -> x y y, |y| objects (no sharing):
+  |y|=  1  copies=   2 counters=   2
+  |y|=  3  copies=   4 counters=   2
+  |y|=  7  copies=   8 counters=   2
+  |y|= 15  copies=  16 counters=   2
+ALL OK
