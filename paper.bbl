@@ -1,0 +1,88 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Biderman(2020)]{biderman2020}
+Biderman.
+\newblock Magic: the gathering is as hard as arithmetic.
+\newblock arXiv:2003.05119, 2020.
+\newblock URL \url{https://arxiv.org/abs/2003.05119}.
+
+\bibitem[Chatterjee and Ibsen-Jensen(2016)]{chatterjee2016}
+Chatterjee and Ibsen-Jensen.
+\newblock The complexity of deciding legality of a single step of {M}agic: the
+  gathering.
+\newblock In \emph{ECAI 2016}, 2016.
+\newblock \doi{10.3233/978-1-61499-672-9-1432}.
+\newblock Known to us from a search result only; not read.
+
+\bibitem[Churchill()]{churchillsite}
+Churchill.
+\newblock [web pages on {T}uring machines built in {M}agic: the gathering].
+\newblock \url{https://toothycat.net/~hologram/Turing/About.html}.
+\newblock details unverified; page title not recorded in our notes.
+
+\bibitem[Churchill et~al.(2019)Churchill, Biderman, and Herrick]{cbh2019}
+Churchill, Biderman, and Herrick.
+\newblock Magic: The gathering is {T}uring complete.
+\newblock arXiv:1904.09828, 2019.
+\newblock URL \url{https://arxiv.org/abs/1904.09828}.
+\newblock Also published at FUN 2021 (LIPIcs), doi:10.4230/LIPIcs.FUN.2021.9.
+
+\bibitem[Curry and Feys(1958)]{curryfeys1958}
+Haskell~B. Curry and Robert Feys.
+\newblock \emph{Combinatory Logic, Volume {I}}.
+\newblock North-Holland, 1958.
+\newblock details unverified.
+
+\bibitem[Dalaklis and Fields(2026)]{dalaklis2026}
+Dalaklis and Fields.
+\newblock Riftbound is {T}uring complete.
+\newblock arXiv:2609.33839, 2026.
+\newblock URL \url{https://arxiv.org/abs/2609.33839}.
+
+\bibitem[Nicolosi et~al.(2026)Nicolosi, Pisciotta, and Bresolin]{nicolosi2026}
+Nicolosi, Pisciotta, and Bresolin.
+\newblock Deciding winning strategies in {Y}u-{G}i-{O}h! {TCG} is hard.
+\newblock arXiv:2603.02863, 2026.
+\newblock URL \url{https://arxiv.org/abs/2603.02863}.
+\newblock v1 titled ``Optimal play in Yu-Gi-Oh! TCG is hard''.
+
+\bibitem[Sch{\"o}nfinkel(1924)]{schonfinkel1924}
+Moses Sch{\"o}nfinkel.
+\newblock {\"U}ber die {B}austeine der mathematischen {L}ogik.
+\newblock \emph{Mathematische Annalen}, 92:\penalty0 305--316, 1924.
+\newblock details unverified.
+
+\bibitem[Scryfall()]{scryfall}
+Scryfall.
+\newblock Scryfall card database.
+\newblock \url{https://scryfall.com}, 2026.
+\newblock Oracle text and Scryfall's copies of the Gatherer rulings, accessed
+  2026-11-21.
+
+\bibitem[Turner(1979)]{turner1979}
+David~A. Turner.
+\newblock A new implementation technique for applicative languages.
+\newblock \emph{Software: Practice and Experience}, 9\penalty0 (1):\penalty0
+  31--49, 1979.
+\newblock details unverified.
+
+\bibitem[{Wizards of the Coast}(2026)]{cr2026}
+{Wizards of the Coast}.
+\newblock Magic: The gathering comprehensive rules, 2026.
+\newblock Edition effective 6 November 2026. Quotations taken from the per-rule
+  renderings on mtg.wiki and from the yawgatog.com copy of this edition.
+
+\bibitem[Yin and Churchill(2024)]{yin2024}
+Yin and Churchill.
+\newblock A programming language embedded in {M}agic: The gathering.
+\newblock In \emph{FUN 2024}, volume 291 of \emph{LIPIcs}, 2024.
+\newblock \doi{10.4230/LIPIcs.FUN.2024.31}.
+\newblock URL
+  \url{https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.FUN.2024.31}.
+
+\end{thebibliography}

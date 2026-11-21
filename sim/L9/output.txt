@@ -1,0 +1,259 @@
+L9 simulator: L6 Aura forest, COPY by Replicator (tapped token copy of a token)
+engines: G = Guildmage MOVE + Replicator COPY;  R = Replicator COPY only (rebuild)
+mana = Scepter/Dramatic Reversal/Lotus loops (one loop = +1 mana);
+res = stack objects resolved (each needs all players to pass)
+
+== setup trace: seeding the labels of S K K x (Lithoform Engine on cast label cards) ==
+      [one loop, in full: tap Gilded Lotus for WWW (mana ability); pay {2}, tap Isochron Scepter: ability on the stack; all pass: cast the Dramatic Reversal copy; all pass: it resolves, untapping Lotus, Scepter, Replicator and every other nonland permanent. Net +1 W; stack back to what it was]
+      mana: 4 Scepter/Dramatic Reversal/Lotus loop(s)
+      cast Indestructibility; stack(bottom->top): Indestructibility (Aura spell, target THOST#7[Food])
+      mana: 4 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Lithoform Engine {4},{T}; stack(bottom->top): Indestructibility (Aura spell, target THOST#7[Food]), Lithoform Engine ability (target Indestructibility spell)
+      seed CELL#8[Indestructibility] made; label card CELL#9[Indestructibility] also on THOST#7[Food]
+      mana: 3 Scepter/Dramatic Reversal/Lotus loop(s)
+      cast Intercessor's Arrest; stack(bottom->top): Intercessor's Arrest (Aura spell, target THOST#7[Food])
+      mana: 4 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Lithoform Engine {4},{T}; stack(bottom->top): Intercessor's Arrest (Aura spell, target THOST#7[Food]), Lithoform Engine ability (target Intercessor's Arrest spell)
+      seed K#10[Intercessor's Arrest] made; label card K#11[Intercessor's Arrest] also on THOST#7[Food]
+      mana: 3 Scepter/Dramatic Reversal/Lotus loop(s)
+      cast Bound in Gold; stack(bottom->top): Bound in Gold (Aura spell, target THOST#7[Food])
+      mana: 4 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Lithoform Engine {4},{T}; stack(bottom->top): Bound in Gold (Aura spell, target THOST#7[Food]), Lithoform Engine ability (target Bound in Gold spell)
+      seed S#12[Bound in Gold] made; label card S#13[Bound in Gold] also on THOST#7[Food]
+      mana: 6 Scepter/Dramatic Reversal/Lotus loop(s)
+      cast Confiscate; stack(bottom->top): Confiscate (Aura spell, target THOST#7[Food])
+      mana: 4 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Lithoform Engine {4},{T}; stack(bottom->top): Confiscate (Aura spell, target THOST#7[Food]), Lithoform Engine ability (target Confiscate spell)
+      seed x#14[Confiscate] made; label card x#15[Confiscate] also on THOST#7[Food]
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting S#12[Bound in Gold]; stack(bottom->top): Replicator ability (target S#12[Bound in Gold])
+      COPY  S#12[Bound in Gold] => new S#16[Bound in Gold](T) on ANCHOR#5[Lithoform Engine]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting CELL#8[Indestructibility]; stack(bottom->top): Replicator ability (target CELL#8[Indestructibility])
+      COPY  CELL#8[Indestructibility] => new CELL#17[Indestructibility](T) on S#16[Bound in Gold]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting K#10[Intercessor's Arrest]; stack(bottom->top): Replicator ability (target K#10[Intercessor's Arrest])
+      COPY  K#10[Intercessor's Arrest] => new K#18[Intercessor's Arrest](T) on CELL#17[Indestructibility]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting CELL#8[Indestructibility]; stack(bottom->top): Replicator ability (target CELL#8[Indestructibility])
+      COPY  CELL#8[Indestructibility] => new CELL#19[Indestructibility](T) on CELL#17[Indestructibility]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting K#10[Intercessor's Arrest]; stack(bottom->top): Replicator ability (target K#10[Intercessor's Arrest])
+      COPY  K#10[Intercessor's Arrest] => new K#20[Intercessor's Arrest](T) on CELL#19[Indestructibility]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting CELL#8[Indestructibility]; stack(bottom->top): Replicator ability (target CELL#8[Indestructibility])
+      COPY  CELL#8[Indestructibility] => new CELL#21[Indestructibility](T) on CELL#19[Indestructibility]  (Replicator; host by 303.4f)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting x#14[Confiscate]; stack(bottom->top): Replicator ability (target x#14[Confiscate])
+      COPY  x#14[Confiscate] => new x#22[Confiscate](T) on CELL#21[Indestructibility]  (Replicator; host by 303.4f)
+  setup cost: seeds=4 (Lithoform activations), term build copies=7, mana=46 loops, res=112
+
+== worked trace 1 (engine G): S K K x ==
+    initial board (child indented under the permanent it enchants; (T) = tapped):
+        ANCHOR#5[Lithoform Engine]
+          S#16[Bound in Gold]
+            CELL#17[Indestructibility]
+              K#18[Intercessor's Arrest]
+              CELL#19[Indestructibility]
+                K#20[Intercessor's Arrest]
+                CELL#21[Indestructibility]
+                  x#22[Confiscate](T)
+    stack(bottom->top): empty
+    step 1: redex head S#16[Bound in Gold] on ANCHOR#5[Lithoform Engine]
+      [one loop, in full: tap Gilded Lotus for UUU (mana ability); pay {2}, tap Isochron Scepter: ability on the stack; all pass: cast the Dramatic Reversal copy; all pass: it resolves, untapping Lotus, Scepter, Replicator and every other nonland permanent. Net +1 U; stack back to what it was]
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Guildmage targeting K#18[Intercessor's Arrest]; stack(bottom->top): Simic Guildmage ability (target K#18[Intercessor's Arrest])
+      MOVE  K#18[Intercessor's Arrest] : CELL#17[Indestructibility] -> ANCHOR#5[Lithoform Engine]  (Simic Guildmage {1}{U}) (x becomes the head)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Guildmage targeting CELL#21[Indestructibility]; stack(bottom->top): Simic Guildmage ability (target CELL#21[Indestructibility])
+      MOVE  CELL#21[Indestructibility] : CELL#19[Indestructibility] -> K#18[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (cell holding z)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Guildmage targeting CELL#19[Indestructibility]; stack(bottom->top): Simic Guildmage ability (target CELL#19[Indestructibility])
+      MOVE  CELL#19[Indestructibility] : CELL#17[Indestructibility] -> CELL#21[Indestructibility]  (Simic Guildmage {1}{U}) (cell holding y)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Guildmage targeting CELL#17[Indestructibility]; stack(bottom->top): Simic Guildmage ability (target CELL#17[Indestructibility])
+      MOVE  CELL#17[Indestructibility] : S#16[Bound in Gold] -> K#20[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (freed cell: argument of y)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Replicator {2},{T} targeting x#22[Confiscate]; stack(bottom->top): Replicator ability (target x#22[Confiscate])
+      COPY  x#22[Confiscate] => new x#23[Confiscate](T) on CELL#17[Indestructibility]  (Replicator; host by 303.4f)
+      SAC   S#16[Bound in Gold]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      => K x (K x)    stack(bottom->top): empty
+    step 2: redex head K#18[Intercessor's Arrest] on ANCHOR#5[Lithoform Engine]
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s)
+      activate Guildmage targeting x#22[Confiscate]; stack(bottom->top): Simic Guildmage ability (target x#22[Confiscate])
+      MOVE  x#22[Confiscate] : CELL#21[Indestructibility] -> ANCHOR#5[Lithoform Engine]  (Simic Guildmage {1}{U}) (x becomes the head)
+      SAC   K#18[Intercessor's Arrest]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#21[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): CELL#19[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): K#20[Intercessor's Arrest]
+      SBA pass 4 (704.5m; tokens cease to exist 704.5d): CELL#17[Indestructibility]
+      SBA pass 5 (704.5m; tokens cease to exist 704.5d): x#23[Confiscate]
+      => x    stack(bottom->top): empty
+  normal form: x ; steps=2 mv=5 cp=1 sac=2 sba=5 mana=12 res=32 trig=0 max_nodes=7
+
+== worked trace 2 (engine R, no Guildmage): S K K x ==
+    initial board (child indented under the permanent it enchants; (T) = tapped):
+        ANCHOR#4[Lithoform Engine]
+          S#15[Bound in Gold]
+            CELL#16[Indestructibility]
+              K#17[Intercessor's Arrest]
+              CELL#18[Indestructibility]
+                K#19[Intercessor's Arrest]
+                CELL#20[Indestructibility]
+                  x#21[Confiscate](T)
+    stack(bottom->top): empty
+    step 1: redex head S#15[Bound in Gold] on ANCHOR#4[Lithoform Engine]
+      COPY  K#17[Intercessor's Arrest] => new K#22[Intercessor's Arrest](T) on ANCHOR#4[Lithoform Engine]  (Replicator; host by 303.4f)
+      COPY  CELL#16[Indestructibility] => new CELL#23[Indestructibility](T) on K#22[Intercessor's Arrest]  (Replicator; host by 303.4f)
+      COPY  x#21[Confiscate] => new x#24[Confiscate](T) on CELL#23[Indestructibility]  (Replicator; host by 303.4f)
+      COPY  CELL#16[Indestructibility] => new CELL#25[Indestructibility](T) on CELL#23[Indestructibility]  (Replicator; host by 303.4f)
+      COPY  K#19[Intercessor's Arrest] => new K#26[Intercessor's Arrest](T) on CELL#25[Indestructibility]  (Replicator; host by 303.4f)
+      COPY  CELL#16[Indestructibility] => new CELL#27[Indestructibility](T) on K#26[Intercessor's Arrest]  (Replicator; host by 303.4f)
+      COPY  x#21[Confiscate] => new x#28[Confiscate](T) on CELL#27[Indestructibility]  (Replicator; host by 303.4f)
+      SAC   S#15[Bound in Gold]  (Auratog cost) (old head; the cascade removes the old subterm)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#16[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): K#17[Intercessor's Arrest], CELL#18[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): K#19[Intercessor's Arrest], CELL#20[Indestructibility]
+      SBA pass 4 (704.5m; tokens cease to exist 704.5d): x#21[Confiscate]
+      => K x (K x)    stack(bottom->top): empty
+    step 2: redex head K#22[Intercessor's Arrest] on ANCHOR#4[Lithoform Engine]
+      COPY  x#24[Confiscate] => new x#29[Confiscate](T) on ANCHOR#4[Lithoform Engine]  (Replicator; host by 303.4f)
+      SAC   K#22[Intercessor's Arrest]  (Auratog cost) (old head; the cascade removes the old subterm)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#23[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): x#24[Confiscate], CELL#25[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): K#26[Intercessor's Arrest]
+      SBA pass 4 (704.5m; tokens cease to exist 704.5d): CELL#27[Indestructibility]
+      SBA pass 5 (704.5m; tokens cease to exist 704.5d): x#28[Confiscate]
+      => x    stack(bottom->top): empty
+  normal form: x ; steps=2 mv=0 cp=8 sac=2 sba=9 mana=16 res=42 trig=0 max_nodes=7
+
+== worked trace 3 (engine G) with forced pauses after every primitive ==
+    initial board (child indented under the permanent it enchants; (T) = tapped):
+        ANCHOR#5[Lithoform Engine]
+          S#16[Bound in Gold]
+            CELL#17[Indestructibility]
+              K#18[Intercessor's Arrest]
+              CELL#19[Indestructibility]
+                K#20[Intercessor's Arrest]
+                CELL#21[Indestructibility]
+                  x#22[Confiscate](T)
+    stack(bottom->top): empty
+    step 1: redex head S#16[Bound in Gold] on ANCHOR#5[Lithoform Engine]
+      MOVE  K#18[Intercessor's Arrest] : CELL#17[Indestructibility] -> ANCHOR#5[Lithoform Engine]  (Simic Guildmage {1}{U}) (x becomes the head)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      MOVE  CELL#21[Indestructibility] : CELL#19[Indestructibility] -> K#18[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (cell holding z)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      MOVE  CELL#19[Indestructibility] : CELL#17[Indestructibility] -> CELL#21[Indestructibility]  (Simic Guildmage {1}{U}) (cell holding y)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      MOVE  CELL#17[Indestructibility] : S#16[Bound in Gold] -> K#20[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (freed cell: argument of y)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      COPY  x#22[Confiscate] => new x#23[Confiscate](T) on CELL#17[Indestructibility]  (Replicator; host by 303.4f)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      SAC   S#16[Bound in Gold]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      PAUSE: turn passes (pool of 0 empties; untap step; upkeep; draw; first main phase: Elemental Resonance adds 0); resume
+      => K x (K x)    stack(bottom->top): empty
+    step 2: redex head K#18[Intercessor's Arrest] on ANCHOR#5[Lithoform Engine]
+      MOVE  x#22[Confiscate] : CELL#21[Indestructibility] -> ANCHOR#5[Lithoform Engine]  (Simic Guildmage {1}{U}) (x becomes the head)
+      PAUSE: the step ends (pool of 0 empties, 106.4); resume in the next step
+      SAC   K#18[Intercessor's Arrest]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#21[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): CELL#19[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): K#20[Intercessor's Arrest]
+      SBA pass 4 (704.5m; tokens cease to exist 704.5d): CELL#17[Indestructibility]
+      SBA pass 5 (704.5m; tokens cease to exist 704.5d): x#23[Confiscate]
+      PAUSE: turn passes (pool of 0 empties; untap step; upkeep; draw; first main phase: Elemental Resonance adds 0); resume
+      => x    stack(bottom->top): empty
+  normal form: x ; steps=2 mv=5 cp=1 sac=2 sba=5 mana=12 res=32 trig=0 max_nodes=7 pauses=8 turns=2 mana_lost=0 er_mana=0
+
+== lockstep vs reference reducer, fixed terms; mana and res for L6 / L9-G / L9-R ==
+   term                                     nf                L6 mana/res            L9-G mana/res          L9-R mana/res         
+   S K K x                                  x                 16/42                  12/32 (cp 1)           16/42 (cp 8)           OK
+   W K x                                    x                 14/37                  10/27 (cp 1)           12/32 (cp 6)           OK
+   S I I (K a)                              a                 32/81                  20/53 (cp 3)           42/108 (cp 21)         OK
+   S I I I                                  I                 22/59                  18/49 (cp 1)           32/84 (cp 16)          OK
+   B f g x                                  f (g x)           6/17                   6/16 (cp 0)            10/27 (cp 5)           OK
+   C f x y                                  f y x             6/17                   6/16 (cp 0)            10/27 (cp 5)           OK
+   C (B f) x y                              f (y x)           12/33                  12/32 (cp 0)           24/64 (cp 12)          OK
+   B (C K) W x y                            y                 16/44                  16/43 (cp 0)           34/89 (cp 17)          OK
+   S x y (K a b)                            x a (y a)         42/104                 22/58 (cp 5)           34/90 (cp 17)          OK
+   S (S (K S) K) I f x                      f (f x)           58/149                 46/121 (cp 3)          124/316 (cp 62)        OK
+   S (S (K S) K) (S (S (K S) K) I) f x      f (f (f x))       112/286                88/231 (cp 6)          342/866 (cp 171)       OK
+   S (S (K S) K) I (S (S (K S) K) I) f x    f (f (f (f x)))   634/1533               322/830 (cp 78)        1414/3560 (cp 707)     OK
+   K a (S I I (S I I))                      a                 2/7                    2/6 (cp 0)             2/6 (cp 1)             OK
+   K a (W W W)                              a                 2/7                    2/6 (cp 0)             2/6 (cp 1)             OK
+   W (B f) (K a)                            f a               32/81                  20/53 (cp 3)           42/108 (cp 21)         OK
+   S (K (S I)) K a b                        b a               40/104                 32/85 (cp 2)           78/200 (cp 39)         OK
+   K (I a)                                  K a               2/7                    2/6 (cp 0)             2/6 (cp 1)             OK
+   (L9-G moves/copies/sacs asserted equal to L6 on every term: same rule sequences)
+
+== non-normalising terms under a 40-step bound (lockstep on every step) ==
+   S I I (S I I)                                  G status=fuel steps=40 mv=96 cp=96 sac=40 sba=32 mana=384 res=1000 trig=0 max_nodes=43
+   S I I (S I I)                                  R status=fuel steps=40 mv=0 cp=1084 sac=40 sba=648 mana=2168 res=5460 trig=0 max_nodes=43
+   W W W                                          G status=fuel steps=40 mv=120 cp=40 sac=40 sba=0 mana=320 res=840 trig=0 max_nodes=5
+   W W W                                          R status=fuel steps=40 mv=0 cp=200 sac=40 sba=120 mana=400 res=1040 trig=0 max_nodes=5
+   S (K (S I I)) (S (S (K S) K) (K (S I I))) f    G status=fuel steps=40 mv=122 cp=193 sac=40 sba=101 mana=630 res=1615 trig=0 max_nodes=75
+   S (K (S I I)) (S (S (K S) K) (K (S I I))) f    R status=fuel steps=40 mv=0 cp=1748 sac=40 sba=697 mana=3496 res=8780 trig=0 max_nodes=75
+
+== per-rule cost of one head step (n = atoms in the copied/kept argument) ==
+   I x        G  n=1: mv=1 cp=0 mana=2 res=6 | n=2: mv=1 cp=0 mana=2 res=6 | n=4: mv=1 cp=0 mana=2 res=6 | n=8: mv=1 cp=0 mana=2 res=6
+   I x        R  n=1: mv=0 cp=1 mana=2 res=6 | n=2: mv=0 cp=1 mana=2 res=6 | n=4: mv=0 cp=1 mana=2 res=6 | n=8: mv=0 cp=1 mana=2 res=6
+   I x r      G  n=1: mv=2 cp=0 mana=4 res=11 | n=2: mv=2 cp=0 mana=4 res=11 | n=4: mv=2 cp=0 mana=4 res=11 | n=8: mv=2 cp=0 mana=4 res=11
+   I x r      R  n=1: mv=0 cp=3 mana=6 res=16 | n=2: mv=0 cp=3 mana=6 res=16 | n=4: mv=0 cp=3 mana=6 res=16 | n=8: mv=0 cp=3 mana=6 res=16
+   K x Y      G  n=1: mv=1 cp=0 mana=2 res=6 | n=2: mv=1 cp=0 mana=2 res=6 | n=4: mv=1 cp=0 mana=2 res=6 | n=8: mv=1 cp=0 mana=2 res=6
+   K x Y      R  n=1: mv=0 cp=1 mana=2 res=6 | n=2: mv=0 cp=1 mana=2 res=6 | n=4: mv=0 cp=1 mana=2 res=7 | n=8: mv=0 cp=1 mana=2 res=7
+   K x Y r    G  n=1: mv=2 cp=0 mana=4 res=11 | n=2: mv=2 cp=0 mana=4 res=11 | n=4: mv=2 cp=0 mana=4 res=11 | n=8: mv=2 cp=0 mana=4 res=11
+   K x Y r    R  n=1: mv=0 cp=3 mana=6 res=17 | n=2: mv=0 cp=3 mana=6 res=17 | n=4: mv=0 cp=3 mana=6 res=18 | n=8: mv=0 cp=3 mana=6 res=18
+   B x y z    G  n=1: mv=3 cp=0 mana=6 res=16 | n=2: mv=3 cp=0 mana=6 res=16 | n=4: mv=3 cp=0 mana=6 res=16 | n=8: mv=3 cp=0 mana=6 res=16
+   B x y z    R  n=1: mv=0 cp=5 mana=10 res=27 | n=2: mv=0 cp=5 mana=10 res=27 | n=4: mv=0 cp=5 mana=10 res=27 | n=8: mv=0 cp=5 mana=10 res=27
+   B x y z r  G  n=1: mv=4 cp=0 mana=8 res=21 | n=2: mv=4 cp=0 mana=8 res=21 | n=4: mv=4 cp=0 mana=8 res=21 | n=8: mv=4 cp=0 mana=8 res=21
+   B x y z r  R  n=1: mv=0 cp=7 mana=14 res=38 | n=2: mv=0 cp=7 mana=14 res=38 | n=4: mv=0 cp=7 mana=14 res=38 | n=8: mv=0 cp=7 mana=14 res=38
+   C x y z    G  n=1: mv=3 cp=0 mana=6 res=16 | n=2: mv=3 cp=0 mana=6 res=16 | n=4: mv=3 cp=0 mana=6 res=16 | n=8: mv=3 cp=0 mana=6 res=16
+   C x y z    R  n=1: mv=0 cp=5 mana=10 res=27 | n=2: mv=0 cp=5 mana=10 res=27 | n=4: mv=0 cp=5 mana=10 res=27 | n=8: mv=0 cp=5 mana=10 res=27
+   C x y z r  G  n=1: mv=4 cp=0 mana=8 res=21 | n=2: mv=4 cp=0 mana=8 res=21 | n=4: mv=4 cp=0 mana=8 res=21 | n=8: mv=4 cp=0 mana=8 res=21
+   C x y z r  R  n=1: mv=0 cp=7 mana=14 res=38 | n=2: mv=0 cp=7 mana=14 res=38 | n=4: mv=0 cp=7 mana=14 res=38 | n=8: mv=0 cp=7 mana=14 res=38
+   W x Y      G  n=1: mv=3 cp=1 mana=8 res=21 | n=2: mv=3 cp=3 mana=12 res=31 | n=4: mv=3 cp=7 mana=20 res=51 | n=8: mv=3 cp=15 mana=36 res=91
+   W x Y      R  n=1: mv=0 cp=5 mana=10 res=26 | n=2: mv=0 cp=9 mana=18 res=46 | n=4: mv=0 cp=17 mana=34 res=87 | n=8: mv=0 cp=33 mana=66 res=167
+   W x Y r    G  n=1: mv=4 cp=1 mana=10 res=26 | n=2: mv=4 cp=3 mana=14 res=36 | n=4: mv=4 cp=7 mana=22 res=56 | n=8: mv=4 cp=15 mana=38 res=96
+   W x Y r    R  n=1: mv=0 cp=7 mana=14 res=37 | n=2: mv=0 cp=11 mana=22 res=57 | n=4: mv=0 cp=19 mana=38 res=98 | n=8: mv=0 cp=35 mana=70 res=178
+   S x y Y    G  n=1: mv=4 cp=1 mana=10 res=26 | n=2: mv=4 cp=3 mana=14 res=36 | n=4: mv=4 cp=7 mana=22 res=56 | n=8: mv=4 cp=15 mana=38 res=96
+   S x y Y    R  n=1: mv=0 cp=7 mana=14 res=37 | n=2: mv=0 cp=11 mana=22 res=57 | n=4: mv=0 cp=19 mana=38 res=98 | n=8: mv=0 cp=35 mana=70 res=178
+   S x y Y r  G  n=1: mv=5 cp=1 mana=12 res=31 | n=2: mv=5 cp=3 mana=16 res=41 | n=4: mv=5 cp=7 mana=24 res=61 | n=8: mv=5 cp=15 mana=40 res=101
+   S x y Y r  R  n=1: mv=0 cp=9 mana=18 res=48 | n=2: mv=0 cp=13 mana=26 res=68 | n=4: mv=0 cp=21 mana=42 res=108 | n=8: mv=0 cp=37 mana=74 res=188
+
+== basis comparison: mana (moves/copies) for L6, L9-G, L9-R ==
+   succ 2 p q     SKI    size=25  L6 112 (38/6)      L9-G 88 (38/6)       L9-R 342 (0/171)       OK
+   succ 2 p q     BCKW   size=23  L6 84 (36/2)       L9-G 76 (36/2)       L9-R 272 (0/136)       OK
+   succ 2 p q     SKIBC  size=13  L6 48 (18/2)       L9-G 40 (18/2)       L9-R 86 (0/43)         OK
+   plus 2 2 p q   SKI    size=49  L6 434 (79/46)     L9-G 250 (79/46)     L9-R 1362 (0/681)      OK
+   plus 2 2 p q   BCKW   size=41  L6 156 (69/3)      L9-G 144 (69/3)      L9-R 878 (0/439)       OK
+   plus 2 2 p q   SKIBC  size=23  L6 90 (36/3)       L9-G 78 (36/3)       L9-R 280 (0/140)       OK
+   mult 2 2 p q   SKI    size=35  L6 514 (74/61)     L9-G 270 (74/61)     L9-R 1152 (0/576)      OK
+   mult 2 2 p q   BCKW   size=25  L6 188 (55/13)     L9-G 136 (55/13)     L9-R 624 (0/312)       OK
+   mult 2 2 p q   SKIBC  size=17  L6 122 (34/9)      L9-G 86 (34/9)       L9-R 264 (0/132)       OK
+   2 2 p q (exp)  SKI    size=27  L6 634 (83/78)     L9-G 322 (83/78)     L9-R 1414 (0/707)      OK
+   2 2 p q (exp)  BCKW   size=23  L6 286 (71/24)     L9-G 190 (71/24)     L9-R 942 (0/471)       OK
+   2 2 p q (exp)  SKIBC  size=15  L6 182 (43/16)     L9-G 118 (43/16)     L9-R 398 (0/199)       OK
+   mult 3 2 p q   SKI    size=45  L6 986 (112/127)   L9-G 478 (112/127)   L9-R 2222 (0/1111)     OK
+   mult 3 2 p q   BCKW   size=33  L6 324 (87/25)     L9-G 224 (87/25)     L9-R 1250 (0/625)      OK
+   mult 3 2 p q   SKIBC  size=21  L6 206 (52/17)     L9-G 138 (52/17)     L9-R 490 (0/245)       OK
+
+== random terms (the same 500 as L6: seed 20261121), lockstep with a step bound ==
+   L6           nf=496 fuel=4 cap=0 fail=0 | steps=1796 mv=4918 cp=5693 sac=1796 mana=43994 res=107076
+   L9-G         nf=496 fuel=4 cap=0 fail=0 | steps=1796 mv=4918 cp=5693 sac=1796 mana=21222 res=55339
+                local invariant checks=14703 pauses=0 (turns passed 0) extra untap loops=0 mana lost at step ends=0 Elemental Resonance mana=0
+   L9-R         nf=496 fuel=4 cap=0 fail=0 | steps=1796 mv=0 cp=72198 sac=1796 mana=144396 res=368368
+                local invariant checks=76290 pauses=0 (turns passed 0) extra untap loops=0 mana lost at step ends=0 Elemental Resonance mana=0
+   L9-G+pauses  nf=496 fuel=4 cap=0 fail=0 | steps=1796 mv=4918 cp=5693 sac=1796 mana=16688 res=58452
+                local invariant checks=16519 pauses=1816 (turns passed 898) extra untap loops=1757 mana lost at step ends=36483 Elemental Resonance mana=42036
+   L9-R+pauses  nf=496 fuel=4 cap=0 fail=0 | steps=1796 mv=0 cp=72198 sac=1796 mana=107068 res=541486
+                local invariant checks=87393 pauses=11103 (turns passed 5623) extra untap loops=26424 mana lost at step ends=908076 Elemental Resonance mana=947632
+
+== rules and protocol demonstrations ==
+   Replicator targeting the Bound in Gold CARD: refused: Replicator: target must be a token (S#13[Bound in Gold] is a card)
+   seeding Take Possession: refused: split second: Lithoform Engine cannot be activated while Take Possession is on the stack
+   MOVE of cell c1 onto a leaf below it: rules pass, protocol rejects: MOVE would create an attachment cycle (rules allow it)
+   MOVE of a leaf onto Auratog: rules pass, per-move invariant rejects: a leaf must enchant a cell or the anchor (on Auratog#3)
+   five variables: labels ['Confiscate', 'Dream Leash', 'Lay Claim', 'Psychic Overload', 'Volition Reins']
+
+ALL OK
+exit 0

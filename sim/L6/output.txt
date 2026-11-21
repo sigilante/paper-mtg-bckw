@@ -1,0 +1,168 @@
+L6 simulator: spine-chain Aura forest + Reiterate/Flash Photography copy engine
+mana = net mana drawn from the Scepter/Dramatic Reversal/Lotus loop (one loop = +1)
+stack_res = stack objects resolved (each needs all players to pass)
+
+== worked trace 1: S K K x, with the copy-engine choreography spelled out ==
+    initial board (child indented under the permanent it enchants):
+        ANCHOR#5[Island]
+          S#11[Bound in Gold]
+            CELL#12[Indestructibility]
+              K#13[Intercessor's Arrest]
+              CELL#14[Indestructibility]
+                K#15[Intercessor's Arrest]
+                CELL#16[Indestructibility]
+                  x#17[Confiscate]
+    stack(bottom->top): Flash Photography (original, target THOST#6[Island])
+    step 1: redex head S#11[Bound in Gold] on ANCHOR#5[Island]
+      [one mana loop, in full: tap Gilded Lotus for UUU (mana ability, no stack); pay {2}, tap Isochron Scepter: ability on the stack above FP; all pass: it resolves, you cast the copy of Dramatic Reversal; all pass: it resolves, untapping Lotus and Scepter. Net: +1 U, stack back to FP alone]
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      activate Guildmage targeting K#13[Intercessor's Arrest]; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Simic Guildmage ability (target K#13[Intercessor's Arrest])
+      MOVE  K#13[Intercessor's Arrest] : CELL#12[Indestructibility] -> ANCHOR#5[Island]  (Simic Guildmage {1}{U}) (x becomes the head)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      activate Guildmage targeting CELL#16[Indestructibility]; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Simic Guildmage ability (target CELL#16[Indestructibility])
+      MOVE  CELL#16[Indestructibility] : CELL#14[Indestructibility] -> K#13[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (cell holding z)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      activate Guildmage targeting CELL#14[Indestructibility]; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Simic Guildmage ability (target CELL#14[Indestructibility])
+      MOVE  CELL#14[Indestructibility] : CELL#12[Indestructibility] -> CELL#16[Indestructibility]  (Simic Guildmage {1}{U}) (cell holding y)
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      activate Guildmage targeting CELL#12[Indestructibility]; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Simic Guildmage ability (target CELL#12[Indestructibility])
+      MOVE  CELL#12[Indestructibility] : S#11[Bound in Gold] -> K#15[Intercessor's Arrest]  (Simic Guildmage {1}{U}) (freed cell: argument of y)
+      mana: 6 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      cast Reiterate with buyback targeting FP; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Reiterate (buyback, target FP)
+      Reiterate resolves: copy of FP with new target x#17[Confiscate]; Reiterate -> hand; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), FP copy (new target x#17[Confiscate])
+      COPY  x#17[Confiscate] => new x#18[Confiscate] on CELL#12[Indestructibility]  (Reiterate+FP copy; host by 303.4f)
+            stack(bottom->top): Flash Photography (original, target THOST#6[Island])
+      SAC   S#11[Bound in Gold]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      => K x (K x)
+    step 2: redex head K#13[Intercessor's Arrest] on ANCHOR#5[Island]
+      mana: 2 Scepter/Dramatic Reversal/Lotus loop(s) (2 stack objects each)
+      activate Guildmage targeting x#17[Confiscate]; stack(bottom->top): Flash Photography (original, target THOST#6[Island]), Simic Guildmage ability (target x#17[Confiscate])
+      MOVE  x#17[Confiscate] : CELL#16[Indestructibility] -> ANCHOR#5[Island]  (Simic Guildmage {1}{U}) (x becomes the head)
+      SAC   K#13[Intercessor's Arrest]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#16[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): CELL#14[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): K#15[Intercessor's Arrest]
+      SBA pass 4 (704.5m; tokens cease to exist 704.5d): CELL#12[Indestructibility]
+      SBA pass 5 (704.5m; tokens cease to exist 704.5d): x#18[Confiscate]
+      => x
+      Flash Photography (original, target THOST#6[Island]) resolves: token copy of THOST#6[Island] (harmless)
+  normal form: x ; steps=2 moves=5 copies=1 sacs=2 sba=5 mana=16 stack_res=42 trig=0 max_nodes=7
+  setup cost (templates cast + term built by COPY): copies=7 mana=62
+
+== worked trace 2: S x y (K a b), step 1 copies the compound argument K a b ==
+    initial board (child indented under the permanent it enchants):
+        ANCHOR#5[Island]
+          S#14[Bound in Gold]
+            CELL#15[Indestructibility]
+              x#16[Volition Reins]
+              CELL#17[Indestructibility]
+                y#18[Take Possession]
+                CELL#19[Indestructibility]
+                  K#20[Intercessor's Arrest]
+                    CELL#21[Indestructibility]
+                      a#22[Confiscate]
+                      CELL#23[Indestructibility]
+                        b#24[Lay Claim]
+    stack(bottom->top): Flash Photography (original, target THOST#6[Island])
+    step 1: redex head S#14[Bound in Gold] on ANCHOR#5[Island]
+      MOVE  x#16[Volition Reins] : CELL#15[Indestructibility] -> ANCHOR#5[Island]  (Simic Guildmage {1}{U}) (x becomes the head)
+      MOVE  CELL#19[Indestructibility] : CELL#17[Indestructibility] -> x#16[Volition Reins]  (Simic Guildmage {1}{U}) (cell holding z)
+      MOVE  CELL#17[Indestructibility] : CELL#15[Indestructibility] -> CELL#19[Indestructibility]  (Simic Guildmage {1}{U}) (cell holding y)
+      MOVE  CELL#15[Indestructibility] : S#14[Bound in Gold] -> y#18[Take Possession]  (Simic Guildmage {1}{U}) (freed cell: argument of y)
+      COPY  K#20[Intercessor's Arrest] => new K#25[Intercessor's Arrest] on CELL#15[Indestructibility]  (Reiterate+FP copy; host by 303.4f)
+      COPY  CELL#21[Indestructibility] => new CELL#26[Indestructibility] on K#25[Intercessor's Arrest]  (Reiterate+FP copy; host by 303.4f)
+      COPY  a#22[Confiscate] => new a#27[Confiscate] on CELL#26[Indestructibility]  (Reiterate+FP copy; host by 303.4f)
+      COPY  CELL#23[Indestructibility] => new CELL#28[Indestructibility] on CELL#26[Indestructibility]  (Reiterate+FP copy; host by 303.4f)
+      COPY  b#24[Lay Claim] => new b#29[Lay Claim] on CELL#28[Indestructibility]  (Reiterate+FP copy; host by 303.4f)
+      SAC   S#14[Bound in Gold]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      => x (K a b) (y (K a b))
+    step 2: redex head K#20[Intercessor's Arrest] on CELL#19[Indestructibility]
+      MOVE  a#22[Confiscate] : CELL#21[Indestructibility] -> CELL#19[Indestructibility]  (Simic Guildmage {1}{U}) (x becomes the head)
+      SAC   K#20[Intercessor's Arrest]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#21[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): CELL#23[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): b#24[Lay Claim]
+      => x a (y (K a b))
+    step 3: redex head K#25[Intercessor's Arrest] on CELL#15[Indestructibility]
+      MOVE  a#27[Confiscate] : CELL#26[Indestructibility] -> CELL#15[Indestructibility]  (Simic Guildmage {1}{U}) (x becomes the head)
+      SAC   K#25[Intercessor's Arrest]  (Auratog cost) (old head; SBA cascade collects whatever still hangs from it)
+      SBA pass 1 (704.5m; tokens cease to exist 704.5d): CELL#26[Indestructibility]
+      SBA pass 2 (704.5m; tokens cease to exist 704.5d): CELL#28[Indestructibility]
+      SBA pass 3 (704.5m; tokens cease to exist 704.5d): b#29[Lay Claim]
+      => x a (y a)
+      Flash Photography (original, target THOST#6[Island]) resolves: token copy of THOST#6[Island] (harmless)
+  normal form: x a (y a) ; steps=3 moves=6 copies=5 sacs=3 sba=6 mana=42 stack_res=104 trig=0 max_nodes=15
+
+== lockstep check vs reference normal-order reducer (fixed terms) ==
+S K K x                                      -> x                  OK  steps=2 moves=5 copies=1 sacs=2 sba=5 mana=16 stack_res=42 trig=0 max_nodes=7
+W K x                                        -> x                  OK  steps=2 moves=4 copies=1 sacs=2 sba=3 mana=14 stack_res=37 trig=0 max_nodes=5
+S I I (K a)                                  -> a                  OK  steps=3 moves=7 copies=3 sacs=3 sba=8 mana=32 stack_res=81 trig=0 max_nodes=11
+S I I I                                      -> I                  OK  steps=4 moves=8 copies=1 sacs=4 sba=3 mana=22 stack_res=59 trig=0 max_nodes=7
+B f g x                                      -> f (g x)            OK  steps=1 moves=3 copies=0 sacs=1 sba=1 mana=6 stack_res=17 trig=0 max_nodes=7
+C f x y                                      -> f y x              OK  steps=1 moves=3 copies=0 sacs=1 sba=1 mana=6 stack_res=17 trig=0 max_nodes=7
+C (B f) x y                                  -> f (y x)            OK  steps=2 moves=6 copies=0 sacs=2 sba=2 mana=12 stack_res=33 trig=0 max_nodes=9
+B (C K) W x y                                -> y                  OK  steps=3 moves=8 copies=0 sacs=3 sba=7 mana=16 stack_res=44 trig=0 max_nodes=11
+S x y (K a b)                                -> x a (y a)          OK  steps=3 moves=6 copies=5 sacs=3 sba=6 mana=42 stack_res=104 trig=0 max_nodes=15
+S (S (K S) K) I f x                          -> f (f x)            OK  steps=6 moves=20 copies=3 sacs=6 sba=7 mana=58 stack_res=149 trig=0 max_nodes=15
+S (S (K S) K) (S (S (K S) K) I) f x          -> f (f (f x))        OK  steps=11 moves=38 copies=6 sacs=11 sba=13 mana=112 stack_res=286 trig=0 max_nodes=25
+S (S (K S) K) I (S (S (K S) K) I) f x        -> f (f (f (f x)))    OK  steps=25 moves=83 copies=78 sacs=25 sba=53 mana=634 stack_res=1533 trig=0 max_nodes=57
+K a (S I I (S I I))                          -> a                  OK  steps=1 moves=1 copies=0 sacs=1 sba=10 mana=2 stack_res=7 trig=0 max_nodes=15
+K a (W W W)                                  -> a                  OK  steps=1 moves=1 copies=0 sacs=1 sba=6 mana=2 stack_res=7 trig=0 max_nodes=9
+W (B f) (K a)                                -> f a                OK  steps=3 moves=7 copies=3 sacs=3 sba=6 mana=32 stack_res=81 trig=0 max_nodes=11
+S (K (S I)) K a b                            -> b a                OK  steps=5 moves=14 copies=2 sacs=5 sba=7 mana=40 stack_res=104 trig=0 max_nodes=13
+K (I a)                                      -> K a                OK  steps=1 moves=1 copies=0 sacs=1 sba=1 mana=2 stack_res=7 trig=0 max_nodes=5
+
+== non-normalising terms run under a step bound (lockstep holds on every step) ==
+S I I (S I I)                                  status=fuel steps=40 moves=96 copies=96 sacs=40 sba=32 mana=768 stack_res=1865 trig=0 max_nodes=43
+W W W                                          status=fuel steps=40 moves=120 copies=40 sacs=40 sba=0 mana=480 stack_res=1201 trig=0 max_nodes=5
+S (K (S I I)) (S (S (K S) K) (K (S I I))) f    status=fuel steps=40 moves=122 copies=193 sacs=40 sba=101 mana=1402 stack_res=3353 trig=0 max_nodes=75
+  (the last is Y f: head-normalises to f (Y' f), then normal order descends into
+   the argument forever; every step is a legal optional sequence, no draw: 104.4b)
+
+== per-rule cost of one head step, as a function of the copied argument ==
+   (n = number of atoms in the copied argument; its encoding has 2n-1 Auras)
+  I x           n=1: mv=1 cp=0 sac=1 sba=1 mana=2 | n=2: mv=1 cp=0 sac=1 sba=1 mana=2 | n=4: mv=1 cp=0 sac=1 sba=1 mana=2 | n=8: mv=1 cp=0 sac=1 sba=1 mana=2
+  I x r         n=1: mv=2 cp=0 sac=1 sba=1 mana=4 | n=2: mv=2 cp=0 sac=1 sba=1 mana=4 | n=4: mv=2 cp=0 sac=1 sba=1 mana=4 | n=8: mv=2 cp=0 sac=1 sba=1 mana=4
+  K x Y         n=1: mv=1 cp=0 sac=1 sba=3 mana=2 | n=2: mv=1 cp=0 sac=1 sba=5 mana=2 | n=4: mv=1 cp=0 sac=1 sba=8 mana=2 | n=8: mv=1 cp=0 sac=1 sba=12 mana=2
+  K x Y r       n=1: mv=2 cp=0 sac=1 sba=3 mana=4 | n=2: mv=2 cp=0 sac=1 sba=5 mana=4 | n=4: mv=2 cp=0 sac=1 sba=8 mana=4 | n=8: mv=2 cp=0 sac=1 sba=12 mana=4
+  B x y z       n=1: mv=3 cp=0 sac=1 sba=1 mana=6 | n=2: mv=3 cp=0 sac=1 sba=1 mana=6 | n=4: mv=3 cp=0 sac=1 sba=1 mana=6 | n=8: mv=3 cp=0 sac=1 sba=1 mana=6
+  B x y z r     n=1: mv=4 cp=0 sac=1 sba=1 mana=8 | n=2: mv=4 cp=0 sac=1 sba=1 mana=8 | n=4: mv=4 cp=0 sac=1 sba=1 mana=8 | n=8: mv=4 cp=0 sac=1 sba=1 mana=8
+  C x y z       n=1: mv=3 cp=0 sac=1 sba=1 mana=6 | n=2: mv=3 cp=0 sac=1 sba=1 mana=6 | n=4: mv=3 cp=0 sac=1 sba=1 mana=6 | n=8: mv=3 cp=0 sac=1 sba=1 mana=6
+  C x y z r     n=1: mv=4 cp=0 sac=1 sba=1 mana=8 | n=2: mv=4 cp=0 sac=1 sba=1 mana=8 | n=4: mv=4 cp=0 sac=1 sba=1 mana=8 | n=8: mv=4 cp=0 sac=1 sba=1 mana=8
+  W x Y         n=1: mv=3 cp=1 sac=1 sba=0 mana=12 | n=2: mv=3 cp=3 sac=1 sba=0 mana=24 | n=4: mv=3 cp=7 sac=1 sba=0 mana=48 | n=8: mv=3 cp=15 sac=1 sba=0 mana=96
+  W x Y r       n=1: mv=4 cp=1 sac=1 sba=0 mana=14 | n=2: mv=4 cp=3 sac=1 sba=0 mana=26 | n=4: mv=4 cp=7 sac=1 sba=0 mana=50 | n=8: mv=4 cp=15 sac=1 sba=0 mana=98
+  S x y Y       n=1: mv=4 cp=1 sac=1 sba=0 mana=14 | n=2: mv=4 cp=3 sac=1 sba=0 mana=26 | n=4: mv=4 cp=7 sac=1 sba=0 mana=50 | n=8: mv=4 cp=15 sac=1 sba=0 mana=98
+  S x y Y r     n=1: mv=5 cp=1 sac=1 sba=0 mana=16 | n=2: mv=5 cp=3 sac=1 sba=0 mana=28 | n=4: mv=5 cp=7 sac=1 sba=0 mana=52 | n=8: mv=5 cp=15 sac=1 sba=0 mana=100
+
+== basis comparison: the same lambda programs compiled three ways ==
+   SKI (S,K,I + eta), BCKW (B,C,K,W,I; S-case = W (B (C M) N)), SKIBC (Turner)
+  succ 2 p q       SKI      size=25   nf=p (p (p q))            OK  steps=11 moves=38 copies=6 sacs=11 sba=13 mana=112 stack_res=286 trig=0 max_nodes=25
+  succ 2 p q       BCKW     size=23   nf=p (p (p q))            OK  steps=10 moves=36 copies=2 sacs=10 sba=8 mana=84 stack_res=219 trig=0 max_nodes=23
+  succ 2 p q       BCKW-noI size=27   nf=p (p (p q))            OK  steps=11 moves=40 copies=2 sacs=11 sba=11 mana=92 stack_res=240 trig=0 max_nodes=27
+  succ 2 p q       SKIBC    size=13   nf=p (p (p q))            OK  steps=5 moves=18 copies=2 sacs=5 sba=3 mana=48 stack_res=124 trig=0 max_nodes=13
+  plus 2 2 p q     SKI      size=49   nf=p (p (p (p q)))        OK  steps=23 moves=79 copies=46 sacs=23 sba=47 mana=434 stack_res=1063 trig=0 max_nodes=59
+  plus 2 2 p q     BCKW     size=41   nf=p (p (p (p q)))        OK  steps=19 moves=69 copies=3 sacs=19 sba=16 mana=156 stack_res=407 trig=0 max_nodes=41
+  plus 2 2 p q     BCKW-noI size=49   nf=p (p (p (p q)))        OK  steps=21 moves=77 copies=3 sacs=21 sba=22 mana=172 stack_res=449 trig=0 max_nodes=49
+  plus 2 2 p q     SKIBC    size=23   nf=p (p (p (p q)))        OK  steps=10 moves=36 copies=3 sacs=10 sba=7 mana=90 stack_res=233 trig=0 max_nodes=23
+  mult 2 2 p q     SKI      size=35   nf=p (p (p (p q)))        OK  steps=22 moves=74 copies=61 sacs=22 sba=47 mana=514 stack_res=1247 trig=0 max_nodes=51
+  mult 2 2 p q     BCKW     size=25   nf=p (p (p (p q)))        OK  steps=16 moves=55 copies=13 sacs=16 sba=13 mana=188 stack_res=475 trig=1 max_nodes=33
+  mult 2 2 p q     BCKW-noI size=33   nf=p (p (p (p q)))        OK  steps=19 moves=67 copies=17 sacs=19 sba=22 mana=236 stack_res=595 trig=2 max_nodes=45
+  mult 2 2 p q     SKIBC    size=17   nf=p (p (p (p q)))        OK  steps=10 moves=34 copies=9 sacs=10 sba=7 mana=122 stack_res=307 trig=0 max_nodes=21
+  2 2 p q (exp)    SKI      size=27   nf=p (p (p (p q)))        OK  steps=25 moves=83 copies=78 sacs=25 sba=53 mana=634 stack_res=1533 trig=0 max_nodes=57
+  2 2 p q (exp)    BCKW     size=23   nf=p (p (p (p q)))        OK  steps=21 moves=71 copies=24 sacs=21 sba=17 mana=286 stack_res=715 trig=2 max_nodes=37
+  2 2 p q (exp)    BCKW-noI size=31   nf=p (p (p (p q)))        OK  steps=26 moves=91 copies=36 sacs=26 sba=32 mana=398 stack_res=991 trig=5 max_nodes=57
+  2 2 p q (exp)    SKIBC    size=15   nf=p (p (p (p q)))        OK  steps=13 moves=43 copies=16 sacs=13 sba=9 mana=182 stack_res=453 trig=0 max_nodes=25
+  mult 3 2 p q     SKI      size=45   nf=p (p (p (p (p (p q))))) OK  steps=33 moves=112 copies=127 sacs=33 sba=79 mana=986 stack_res=2372 trig=0 max_nodes=65
+  mult 3 2 p q     BCKW     size=33   nf=p (p (p (p (p (p q))))) OK  steps=25 moves=87 copies=25 sacs=25 sba=20 mana=324 stack_res=813 trig=2 max_nodes=41
+  mult 3 2 p q     BCKW-noI size=41   nf=p (p (p (p (p (p q))))) OK  steps=29 moves=103 copies=33 sacs=29 sba=32 mana=404 stack_res=1011 trig=4 max_nodes=53
+  mult 3 2 p q     SKIBC    size=21   nf=p (p (p (p (p (p q))))) OK  steps=15 moves=52 copies=17 sacs=15 sba=10 mana=206 stack_res=514 trig=0 max_nodes=25
+
+== random terms: lockstep with a step bound ==
+  500 random terms (sizes 1..24 atoms over S K I B C W a b c), all in lockstep: 496 reached normal form, 4 hit the 80-step bound, 0 hit the 1500-node cap
+  totals: steps=1796 moves=4918 copies=5693 sacs=1796
+
+== what the cards do not prevent (protocol, not rules) ==
+  MOVE of cell c1 onto a leaf below it: rules checks pass, protocol rejects: MOVE would create an attachment cycle (rules allow it)
+  SAC of a cell mid-term is legal; the SBA cascade then deletes the arguments below it (3 passes); the board now reads S
+
+ALL OK
