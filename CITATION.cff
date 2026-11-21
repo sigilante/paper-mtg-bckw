@@ -5,7 +5,10 @@ type: article
 authors:
   - family-names: Davis
     given-names: "N. E."
+    alias: Sigilante
+    orcid: "https://orcid.org/0000-0002-1131-8319"
 date-released: 2026-11-21
+license: CC-BY-4.0
 repository-code: "https://github.com/sigilante/paper-mtg-bckw"
 keywords:
   - combinatory logic

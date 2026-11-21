@@ -1,6 +1,6 @@
 # Combinators on the Battlefield: BCKW and SKI Reduction in Magic: The Gathering
 
-Draft paper (N. E. Davis). Combinatory-logic terms are laid out as forests of Auras with
+Draft paper (N. E. Davis / Sigilante). Combinatory-logic terms are laid out as forests of Auras with
 "Enchant permanent", where application is attachment, and reduced in normal order by three
 game actions: re-attach (Simic Guildmage), copy (Flash Photography or Replicator) and
 sacrifice (Auratog), with state-based actions deleting K's discarded argument.
@@ -48,3 +48,7 @@ corrections:
   (for example, Churchill, Biderman and Herrick is FUN 2021, LIPIcs 157, published 2020).
 - Rule 117.5 is quoted in L6 with rule 704.3's wording, and the 707.10 quotation there is
   reordered; `notes/L10-source-check.md` records both.
+
+## Licence
+
+Paper text, figures, PDF and notes: CC BY 4.0 (`LICENSE`). Simulators: MIT (`LICENSE-CODE`). See `LICENSING.md`.
